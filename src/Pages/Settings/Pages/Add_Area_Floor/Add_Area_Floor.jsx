@@ -137,7 +137,7 @@ const Content = () => {
           e.preventDefault();
 
           handleSubmit();
-        }}
+        }}   
       >
         <div className="row">
           {formStructure.map((fields, index) => (
