@@ -1,0 +1,44 @@
+@media screen {
+    .BillPDFMainDiv {
+      display: none;
+    }
+  }
+  
+  @media print {
+    .BillPDFMainDiv {
+      display: block;
+    }
+  }
+
+
+.BillPDFMainDiv{
+     padding: 20px 30px 100px 30px;
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     
+}
+.OrderPtag{
+    font-weight: bolder;
+    font: 50px;
+     
+}
+
+.TableHead{
+font-weight: bolder;
+font-size: 17px;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.totalAmmount{
+    background-color: gray;
+     min-height: 50px;
+     border-radius: 3px;
+     padding: 3px 20px;
+       align-content: center;
+      align-items: center;
+}
+
+.totalAmmount p{
+    margin: auto;
+    font-size: 20px;
+    font-weight: 600;
+}

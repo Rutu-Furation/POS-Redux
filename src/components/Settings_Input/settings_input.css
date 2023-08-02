@@ -1,0 +1,28 @@
+.settings_input_label{
+    font-size: 12px!important;
+    font-weight: 400!important;
+}
+
+.settings_input{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+ span.errorMsg{
+    color: red;
+    font-size: 14px;
+}
+
+/*
+input:invalid[focused="true"] {
+    border: 0.5px solid red;
+}
+
+input:invalid[focused="true"] ~ span.errorMsg {
+    display: block;
+}
+
+input:invalid::-webkit-validation-bubble
+ {
+  display: none;
+} */

@@ -1,0 +1,97 @@
+.dotts-blue {
+  height: 17px;
+  background: #9ddbfb;
+  width: 17px;
+}
+.dotts-dark {
+  height: 17px;
+  background: #fee181;
+  width: 17px;
+}
+.dotts-gray {
+  height: 17px;
+  background: #dee2e6;
+  width: 17px;
+}
+.dotts-pink {
+  height: 17px;
+  background: #f8e1b9;
+  width: 17px;
+}
+.dotts-green {
+  height: 17px;
+  background: #9ce37b;
+  width: 17px;
+}
+
+.dotts-table p {
+  margin: auto;
+  font: Lato;
+  font-size: 16px;
+  line-height: 19.2px;
+  width: 500;
+}
+.main-dotts-table-div {
+  width: 60%;
+}
+
+
+
+.Ground-Floor-div {
+  /* padding: 10px; */
+  color: black;
+  min-width: 80px;
+  min-height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #e9ecef;
+  border: 1px solid #858e96;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.Ground-Floor-div-true {
+  padding: 10px;
+  color: black;
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #fee181;
+  border: 1px solid #858e96;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.AllAreaDiv {
+  /* border: 1px solid rgb(82, 39, 236); */
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  /* align-content: center;
+    align-items: center;  */
+}
+
+
+.IndivualDiv {
+  /* border:4px solid rgb(92, 72, 72); */
+  display: flex;
+  align-content: start;
+  justify-content: start;
+  width: 100%;
+  align-items: start;
+  gap: 30px;
+  /* justify-content: space-around; */
+}
+
+.AreaName {
+  font-size: 17px;
+  font-weight: bolder;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+}

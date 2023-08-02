@@ -1,0 +1,17 @@
+.rdt_Table{
+    border: 0;
+    border-style: hidden;
+}
+
+.rdt_TableRow{
+    border: 0;
+}
+
+.rdt_Table .rdt_TableHead{
+    background-color: #E9ECEF;
+}
+
+.rdt_TableRow:nth-child(2n){
+    background-color: #E9ECEF;
+    border: 0;
+}
