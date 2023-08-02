@@ -1,0 +1,27 @@
+.settingButton{
+    background: linear-gradient(to right,#3A36DB, #7C4EF1);
+    height: 36px;
+    color: #fff;
+    border-radius: 4px;
+    border: "none";
+    font-size: 14px;
+    transition: transform 0.5s ease;
+}
+
+.settingButton:active{
+    
+    transform: scale(0.9);  /* Scale the button to 120% of its original size */
+    color: #fff;
+    outline: transparent;
+    border: none;
+      
+}
+
+.settingButton:hover{
+    background: linear-gradient(to right,#1b17fa, #4e0cf5);
+}
+
+.disabled{
+    /* background: linear-gradient(to right,rgb(117, 115, 254)rgb(176, 148, 246)f3); */
+    background-color: black;
+}

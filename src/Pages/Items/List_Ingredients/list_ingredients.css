@@ -1,0 +1,9 @@
+.ingredientsRow:nth-child(2n){
+    background-color: #E9ECEF;
+    color: #343A40;
+}
+
+.ingredientsRow{
+    height: 36px;
+    font-weight: 400;
+}

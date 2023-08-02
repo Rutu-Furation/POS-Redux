@@ -1,0 +1,41 @@
+.cardTitle{
+    font-size: 15px!important;
+}
+
+.cardPrice{
+    font-size: 12px!important;
+}
+
+.veg{
+    /* height: 80px; */
+    width: 3px;
+    /* background-color: red; */
+}
+
+.MenuCardBody{
+    padding: 0!important;
+   text-transform: capitalize;
+    cursor: pointer;
+}
+.MenuCardBody:hover{
+   background: rgb(245, 245, 245);
+  
+}
+.contentDiv{
+    padding: 15px 0px 15px 0px;
+    overflow: hidden;
+}
+
+.menuItem{
+    font-size: 1rem!important;
+}
+
+.menuPrice{
+    font-size: 1rem!important;
+}
+
+.discountField{
+    width: 64px;
+    border: 0.5px solid #ACB5BD;
+    border-radius: 2px;
+}

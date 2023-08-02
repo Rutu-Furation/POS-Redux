@@ -1,0 +1,236 @@
+/* Table.css */
+
+.tableWrapper {
+  width: 100%;
+  min-width: 70vw;
+  overflow-x: auto;
+  font-family: Lato;
+  color: #343a40;
+
+  min-height: 150px;
+}
+
+.tableComponents {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tableComponents th,
+.tableComponents td {
+  padding: 8px;
+  text-transform: capitalize;
+}
+
+.tableComponents th {
+  background-color: #f2f2f2;
+}
+.tableMainDiv {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.pagination-limit {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.pagination-limit select {
+  border-radius: 5px;
+  padding: 10px;
+  width: 100px;
+  margin-left: 20px;
+}
+
+.paginationAndSearchDiv {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+}
+.search-container {
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  align-items: center;
+}
+/* Styling for the select element */
+.limit-select {
+  padding: 4px;
+  /* Add border to the select element */
+  border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+  font-size: 14px; /* Optional: Customize font size */
+}
+
+/* Styling for the option elements */
+/* .limit-select option {
+  padding: 4px;
+  height: "36px";
+} */
+
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 20px;
+}
+.NumberofDataDiv p {
+  color: #212529;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: Lato;
+  line-height: 14.4px;
+}
+
+.pagination {
+  display: flex;
+  gap: 5px;
+}
+.disableImg {
+  pointer-events: none;
+  background: #ced4da;
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+
+  border-radius: 100%;
+  border-radius: 100%;
+}
+.activeImg {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  padding: 7px;
+
+  border-radius: 100%;
+  background: #858e96;
+}
+.pagination button {
+  padding: 4px 8px;
+  /* background-color: #f2f2f2; */
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 26px;
+  width: 26px;
+  color: rgb(194, 193, 193);
+}
+
+.pagination button.active {
+  background-color: #e4e4e4;
+  font-weight: bold;
+  border: 1px solid gray;
+  border-radius: 4px;
+
+  color: black;
+}
+.pagination button img {
+  background: none;
+  border: none;
+}
+.buttonGroup {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.export-btnDiv {
+  border: 1px solid rgb(211, 208, 208);
+  border-radius: 5px;
+  padding: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.export-btnDiv button {
+  border: none;
+  background: none;
+}
+.sort-btnDiv {
+  border: 1px solid rgb(211, 208, 208);
+  border-radius: 5px;
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.filter-by-category {
+  border-radius: 5px;
+  padding: 10px;
+
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.filter-by-category select {
+  border-radius: 5px;
+  padding: 10px;
+
+  border: 1px solid rgb(211, 208, 208);
+}
+
+.FunctionalDiv {
+  align-items: center;
+  align-content: center;
+  margin-top: 10px;
+}
+
+.highlight-row {
+  background-color: #f2f2f2;
+}
+.alternet-row {
+  background-color: #f2f2f2;
+}
+
+.dropDownButton {
+  border: none;
+  background: none;
+}
+
+.headerName {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+}
+.HearderDiv {
+  color: black;
+  padding: 10px 0px 0px 20px;
+  background: #f1f3f5;
+  height: 57px;
+  align-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 0px, 4px, 4px, 0px;
+}
+.enterButton {
+  border: 1px solid #acb5bd;
+  border-radius: 2px;
+  background: #e9ecef;
+}
+
+.logo-image {
+  width: 100px;
+  height: 100%;
+  border-radius: 5px;
+}
