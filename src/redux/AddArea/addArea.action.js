@@ -23,6 +23,8 @@ const baseURL = "https://famous-bear-kimono.cyclic.app";
 
 
 
+
+
 export const addAreaData = (newData) => async (dispatch) => {
   dispatch({ type: ADD_AREA_LOADING });
   try {
