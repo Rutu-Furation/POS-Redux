@@ -18,3 +18,9 @@ export const getTableList = () => async (dispatch) => {
     dispatch({ type: TABLE_LIST_ERROR, payload: error.message });
   }
 };
+
+
+// } catch (error) {
+//   dispatch({ type: TABLE_LIST_ERROR, payload: error.message });
+// }
+// };
