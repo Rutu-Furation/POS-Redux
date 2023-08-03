@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getTableList } from "../redux/table/table.action";
+// import { getTableList } from "../redux/table/table.action";
 // import { getTableList } from "../redux/table/table.action";
 
 const Home = () => {
-  const  { isLoading,
-  isError,
-  TableListData,} = useSelector((store)=>store.table)
+  // const  { isLoading,
+  // isError,
+  // AreaData,} = useSelector((store)=>store.)
 
-  const disPatch = useDispatch()
-  useEffect(()=>{
-    disPatch(getTableList())
-  },[])
-  console.log(TableListData)
+  // const disPatch = useDispatch()
+  // useEffect(()=>{
+  //   disPatch(getTableList())
+  // },[])
+  // console.log(TableListData)
   return (
     <>
       <h1>Welcome</h1>

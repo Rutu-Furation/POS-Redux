@@ -14,6 +14,8 @@ import {
 } from "../../../../components/index";
 import useFormValidator from "../../../../utils";
 import { addArea_schema } from "../../../../validations/itemsValidations";
+import { addAreaData } from "../../../../redux/AddArea/addArea.action";
+import { useDispatch } from "react-redux";
 
 const Content = () => {
   const [inputValues, setInputValues] = useState("");
@@ -63,23 +65,33 @@ const Content = () => {
     ...inputValues,
     ...selectedValues,
   };
-
+  // ========================
+  // const  { isLoading,
+  //   isError,
+  //   AreaData,} = useSelector((store)=>store.addArea)
+  
+    const disPatch = useDispatch()
+     
+    // console.log(TableListData)
+  // ======================
   console.log(finalObj);
 
   const handleSubmit = async () => {
+    
     const validationErrors = validateForm();
     if (!validationErrors) {
-      try {
-        setLoading(true);
-        const res = await callApi("POST", "/setting/area/new", finalObj);
-        console.log(res);
-        toast.success("Area/Floor added successfully");
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to add Area/Floor");
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   setLoading(true);
+      //   const res = await callApi("POST", "/setting/area/new", finalObj);
+      //   console.log(res);
+      //   toast.success("Area/Floor added successfully");
+      // } catch (error) {
+      //   console.error(error);
+      //   toast.error("Failed to add Area/Floor");
+      // } finally {
+      //   setLoading(false);
+      // }
+      disPatch(addAreaData(finalObj))
     }
   };
   const formStructure = [
@@ -125,7 +137,7 @@ const Content = () => {
           e.preventDefault();
 
           handleSubmit();
-        }}
+        }}   
       >
         <div className="row">
           {formStructure.map((fields, index) => (
