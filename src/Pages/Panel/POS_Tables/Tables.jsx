@@ -1,21 +1,33 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import "./Tables.css";
 import { Link, useNavigate } from "react-router-dom";
 import "aos/dist/aos.css";
 import AOS from "aos";
-import { useQuery } from "react-query";
+// import { useQuery } from "react-query";
 import {
-  callApi,
+  // callApi,
   Loading,
   Settings_Button,
   SideBar,
   SideBar_Links,
 } from "../../../components/index";
-import { GiHamburgerMenu } from "react-icons/gi";
+// import { GiHamburgerMenu } from "react-icons/gi";
 import POS_Nav from "../POS_Nav/POS_Nav";
+import { useSelector, useDispatch } from "react-redux";
+import { getTableList } from "../../../redux/table/table.action";
 // import POS_Nav from "../POS_Nav/POS_Nav";
 
 const Tables = () => {
+  const { isLoading, isError, TableListData } = useSelector(
+    (store) => store.table
+  );
+
+  const disPatch = useDispatch();
+  useEffect(() => {
+    disPatch(getTableList());
+  }, []);
+  console.log(isLoading);
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -36,10 +48,10 @@ const Tables = () => {
     }
   }, [selectedTable]);
 
-  const GetArea = async () => {
-    const res = await callApi("GET", "/setting/area/list");
-    return res.areas;
-  };
+  // const GetArea = async () => {
+  //   const res = await callApi("GET", "/setting/area/list");
+  //   return res.areas;
+  // };
   const orderStatusColors = {
     Running: "#9ddbfb",
     Printed: "#9ce37b",
@@ -47,36 +59,26 @@ const Tables = () => {
     KOT: "#fee181",
   };
 
-  const {
-    data: areaData,
-    isLoading,
-    isError,
-    error,
-    isSuccess,
-    isFetching,
-  } = useQuery("areaData", GetArea);
+  // const {
+  //   data: areaData,
+  //   isLoading,
+  //   isError,
+  //   error,
+  //   isSuccess,
+  //   isFetching,
+  // } = useQuery("areaData", GetArea);
 
   if (isLoading) {
     return <Loading />;
   }
 
-  if (isSuccess) {
-    console.log("From Cache");
-  }
-
-  if (isFetching) {
-    console.log("From Database");
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+     
 
   if (isError) {
     return <div>There is a problem with fetching data</div>;
   }
 
-  if (!areaData) {
+  if (!TableListData) {
     return <div>No data available.</div>;
   }
 
@@ -130,7 +132,7 @@ const Tables = () => {
       </div>
 
       <div className="p-3">
-        {areaData?.map((item, index) => (
+        {TableListData?.map((item, index) => (
           <div className="row g-2 mb-5" key={index}>
             <div className="col-12">
               <p className="text-capitalize">{item?.area_name}</p>

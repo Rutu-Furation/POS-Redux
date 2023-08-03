@@ -1,35 +1,35 @@
 import {
-  TABLE_LIST_ERROR,
-  TABLE_LIST_SUCCESS,
-  TABLE_LIST_LOADING,
-} from "./table.actionType";
+  ADD_AREA_ERROR,  
+  ADD_AREA_SUCCESS,
+  ADD_AREA_LOADING,
+} from "./addArea.actionType";
 
-const tableInitialState = {
+const AddAreaDataInitialState = {
   isLoading: false,
   isError: false,
-  TableListData: [],
+  AreaData: [],
 };
 
-export const tableListReducer = (
-  state = tableInitialState,
+export const addAreaReducer = (
+  state = AddAreaDataInitialState,
   { type, payload }
 ) => {
   switch (type) {
-    case TABLE_LIST_LOADING: {
+    case ADD_AREA_LOADING: {
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
     }
-    case TABLE_LIST_ERROR: {
+    case ADD_AREA_ERROR: {
       return {
         ...state,
         isLoading: false,
         isError: true,
       };
     }
-    case TABLE_LIST_SUCCESS: {
+    case ADD_AREA_SUCCESS: {
       return {
         ...state,
         isLoading: false,
