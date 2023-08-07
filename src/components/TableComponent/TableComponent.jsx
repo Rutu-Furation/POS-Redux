@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -6,10 +6,20 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import "./Table.css";
+import { ImCopy } from "react-icons/im";
+import { FiPrinter } from "react-icons/fi";
+import { useReactToPrint } from "react-to-print";
+
+import { BsFileEarmarkExcel } from "react-icons/bs";
 
 import { images } from "../../assets";
 import { Loading, callApi, toast, Toaster, Pagination } from "../index";
 import TableHeader from "./Table_Headers";
+import TableDataPrint from "./TableDataPrint/TableDataPrint";
+import PdfExportButton from "./PDFGenerator/PDFGenerator ";
+import { deleteAreaData } from "../../redux/AddArea/addArea.action";
+import { useDispatch } from "react-redux";
+
 const TableComponent = ({
   data,
   currentPage,
@@ -23,6 +33,7 @@ const TableComponent = ({
   extraButton,
   deleteRoute,
   categories,
+  pagename,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [tableHeaders, setTableHeaders] = useState([]);
@@ -32,7 +43,7 @@ const TableComponent = ({
   useEffect(() => {
     AOS.init();
   }, []);
-
+  const TableRef = useRef();
   useEffect(() => {
     if (data.length !== 0) {
       setIsLoading(false);
@@ -76,17 +87,19 @@ const TableComponent = ({
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
+  const dispatch = useDispatch();
 
   const handleDelete = async (dataId) => {
-    try {
-      let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);
-      toast.success("Item deleted successfully");
-      playSoundEffect();
-      const updatedData = initialData.filter((item) => item.id !== dataId);
-      setInitialData(updatedData);
-    } catch (error) {
-      toast.error("Failed to delete item:", error);
-    }
+    dispatch(deleteAreaData(dataId));
+    // try {
+    //   let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);
+    //   toast.success("Item deleted successfully");
+    //   playSoundEffect();
+    //   const updatedData = initialData.filter((item) => item.id !== dataId);
+    //   setInitialData(updatedData);
+    // } catch (error) {
+    //   toast.error("Failed to delete item:", error);
+    // }
   };
 
   const playSoundEffect = () => {
@@ -116,6 +129,41 @@ const TableComponent = ({
     document.body.appendChild(link);
     link.click();
   };
+
+  const handleCopy = () => {
+    const dataToCopy = paginatedData.map((item) => {
+      return tableHeaders.map((header) => {
+        if (header === "Logo" && item[header]) {
+          return item[header];
+        } else if (header === "" && item[header] === "Enter") {
+          return "Enter";
+        } else {
+          return Array.isArray(item[header])
+            ? item[header].length
+            : item[header];
+        }
+      });
+    });
+
+    const headerRow = tableHeaders.join("\t");
+    const dataRows = dataToCopy.map((row) => row.join("\t"));
+
+    const csvData = [headerRow, ...dataRows].join("\n");
+
+    try {
+      navigator.clipboard.writeText(csvData);
+      toast.success("Table data copied to clipboard");
+      playSoundEffect();
+    } catch (error) {
+      toast.error("Failed to copy table data to clipboard");
+    }
+  };
+
+  const handleBillPrint = useReactToPrint({
+    content: () => TableRef.current,
+  });
+
+  console.log("pagename", pagename);
 
   if (isLoading) {
     return <Loading />;
@@ -171,8 +219,9 @@ const TableComponent = ({
                   )}
 
                   <div
-                  //  onClick={exportToCsv} 
-                  className="export-btnDiv">
+                    //  onClick={exportToCsv}
+                    className="export-btnDiv"
+                  >
                     <img src={images.share} alt="" />
                     {/* <button className="export-btn">Export</button> */}
                     <div className="dropdown">
@@ -190,9 +239,20 @@ const TableComponent = ({
                         aria-labelledby={`actionDropdown `}
                       >
                         <li>
-                          <button className="dropdown-item" type="button">
+                          <TableDataPrint
+                            props={paginatedData}
+                            ref={TableRef}
+                          />
+
+                          <button
+                            onClick={() => {
+                              handleBillPrint();
+                            }}
+                            className="dropdown-item"
+                            type="button"
+                          >
                             <span className="m-1">
-                              <AiOutlineEdit />
+                              <FiPrinter />
                             </span>{" "}
                             Print
                           </button>
@@ -201,10 +261,10 @@ const TableComponent = ({
                           <button
                             className="dropdown-item"
                             type="button"
-                            // Pass the appropriate data ID here
+                            onClick={() => handleCopy()} // Add the onClick event for copy functionality
                           >
                             <span className="m-1">
-                              <RiDeleteBin6Line />
+                              <ImCopy />
                             </span>{" "}
                             Copy
                           </button>
@@ -213,26 +273,34 @@ const TableComponent = ({
                           <button
                             className="dropdown-item"
                             type="button"
-                            // Pass the appropriate data ID here
+                            onClick={exportToCsv}
                           >
                             <span className="m-1">
-                              <RiDeleteBin6Line />
+                              <BsFileEarmarkExcel />
                             </span>{" "}
                             Excel
                           </button>
                         </li>
-                        
+
                         <li>
-                          <button
+                          {/* <button
                             className="dropdown-item"
                             type="button"
-                            // Pass the appropriate data ID here
+                            
                           >
-                            <span className="m-1">
+                              <span className="m-1">
                               <RiDeleteBin6Line />
+                               
                             </span>{" "}
-                            PDF
-                          </button>
+                            PDF  
+
+                          
+                          </button> */}
+                          <PdfExportButton
+                            tableHeaders={tableHeaders}
+                            paginatedData={paginatedData}
+                            pagename={pagename}
+                          />
                         </li>
                       </ul>
                     </div>

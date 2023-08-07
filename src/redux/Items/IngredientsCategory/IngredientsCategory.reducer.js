@@ -1,24 +1,24 @@
 import {
-  ADD_AREA_ERROR,  
-  ADD_AREA_SUCCESS,
-  ADD_AREA_LOADING,
-  DELETE_AREA_LOADING,
-  DELETE_AREA_ERROR,  
-  DELETE_AREA_SUCCESS,
-} from "./addArea.actionType";
+  ADD_INGREDIENTCATEGORY_ERROR,
+  ADD_INGREDIENTCATEGORY_SUCCESS,
+  ADD_INGREDIENTCATEGORY_LOADING,
+  DELETE_INGREDIENTCATEGORY_LOADING,
+  DELETE_INGREDIENTCATEGORY_ERROR,
+  DELETE_INGREDIENTCATEGORY_SUCCESS,
+} from "./IngredientsCategory.actionType.js";
 
-const AddAreaDataInitialState = {
+const IngredientcategoryDataInitialState = {
   isLoading: false,
   isError: false,
-  AreaData: [],
+  IngredientcategoryData: [],
 };
 
-export const addAreaReducer = (
-  state = AddAreaDataInitialState,
+export const IngredientcategoryReducer = (
+  state = IngredientcategoryDataInitialState,
   { type, payload }
 ) => {
   switch (type) {
-    case ADD_AREA_LOADING: {
+    case ADD_INGREDIENTCATEGORY_LOADING: {
       return {
         ...state,
         isLoading: true,
@@ -26,7 +26,7 @@ export const addAreaReducer = (
       };
     }
 
-    case ADD_AREA_ERROR: {
+    case ADD_INGREDIENTCATEGORY_ERROR: {
       return {
         ...state,
         isLoading: false,
@@ -34,7 +34,7 @@ export const addAreaReducer = (
       };
     }
 
-    case ADD_AREA_SUCCESS: {
+    case ADD_INGREDIENTCATEGORY_SUCCESS: {
       return {
         ...state,
         isLoading: false,
@@ -42,7 +42,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_LOADING:{
+    case DELETE_INGREDIENTCATEGORY_LOADING: {
       return {
         ...state,
         isLoading: true,
@@ -50,7 +50,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_ERROR:{
+    case DELETE_INGREDIENTCATEGORY_ERROR: {
       return {
         ...state,
         isLoading: false,
@@ -58,7 +58,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_SUCCESS:{
+    case DELETE_INGREDIENTCATEGORY_SUCCESS: {
       return {
         ...state,
         isLoading: false,
@@ -67,7 +67,7 @@ export const addAreaReducer = (
     }
 
     default: {
-        return state;
-      }
+      return state;
+    }
   }
 };

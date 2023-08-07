@@ -84,6 +84,7 @@ const List_Area_Floor = () => {
                   startPage={1}
                   endPage={3}
                   pageNumbers={[1, 2, 3]}
+                  pagename="Area"
                 />
               </div>
             </div>

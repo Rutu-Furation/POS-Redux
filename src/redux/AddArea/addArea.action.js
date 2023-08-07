@@ -3,6 +3,9 @@ import {
   ADD_AREA_ERROR,  
   ADD_AREA_SUCCESS,
   ADD_AREA_LOADING,
+  DELETE_AREA_SUCCESS,
+  DELETE_AREA_LOADING,
+  DELETE_AREA_ERROR,
 } from "./addArea.actionType";
 import axios from "axios";
 
@@ -34,6 +37,21 @@ export const addAreaData = (newData) => async (dispatch) => {
     }
   } catch (error) {
     dispatch({ type: ADD_AREA_ERROR, payload: error.message });
+    toast.error("Failed to add Area/Floor");
+  }
+};
+
+export const deleteAreaData = (id) => async (dispatch) => {
+  dispatch({ type: DELETE_AREA_LOADING });
+  try { 
+    let res = await axios.delete(`${baseURL}/setting/area/delete/${id}`);
+    console.log("res",res)
+    if (res.data) {
+      dispatch({ type: DELETE_AREA_SUCCESS, payload: res.data });
+      toast.success("Area/Floor added successfully");
+    }
+  } catch (error) {
+    dispatch({ type: DELETE_AREA_ERROR, payload: error.message });
     toast.error("Failed to add Area/Floor");
   }
 };

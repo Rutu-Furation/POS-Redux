@@ -1,24 +1,24 @@
 import {
-  ADD_AREA_ERROR,  
-  ADD_AREA_SUCCESS,
-  ADD_AREA_LOADING,
-  DELETE_AREA_LOADING,
-  DELETE_AREA_ERROR,  
-  DELETE_AREA_SUCCESS,
-} from "./addArea.actionType";
+  ADD_INGREDIENTUNIT_ERROR,
+  ADD_INGREDIENTUNIT_SUCCESS,
+  ADD_INGREDIENTUNIT_LOADING,
+  DELETE_INGREDIENTUNIT_LOADING,
+  DELETE_INGREDIENTUNIT_ERROR,
+  DELETE_INGREDIENTUNIT_SUCCESS,
+} from "./IngredientsUnit.actionType.js";
 
-const AddAreaDataInitialState = {
+const IngredientUnitDataInitialState = {
   isLoading: false,
   isError: false,
-  AreaData: [],
+  IngredientUnitData: [],
 };
 
-export const addAreaReducer = (
-  state = AddAreaDataInitialState,
+export const IngredientUnitReducer = (
+  state = IngredientUnitDataInitialState,
   { type, payload }
 ) => {
   switch (type) {
-    case ADD_AREA_LOADING: {
+    case ADD_INGREDIENTUNIT_LOADING: {
       return {
         ...state,
         isLoading: true,
@@ -26,7 +26,7 @@ export const addAreaReducer = (
       };
     }
 
-    case ADD_AREA_ERROR: {
+    case ADD_INGREDIENTUNIT_ERROR: {
       return {
         ...state,
         isLoading: false,
@@ -34,7 +34,7 @@ export const addAreaReducer = (
       };
     }
 
-    case ADD_AREA_SUCCESS: {
+    case ADD_INGREDIENTUNIT_SUCCESS: {
       return {
         ...state,
         isLoading: false,
@@ -42,7 +42,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_LOADING:{
+    case DELETE_INGREDIENTUNIT_LOADING: {
       return {
         ...state,
         isLoading: true,
@@ -50,7 +50,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_ERROR:{
+    case DELETE_INGREDIENTUNIT_ERROR: {
       return {
         ...state,
         isLoading: false,
@@ -58,7 +58,7 @@ export const addAreaReducer = (
       };
     }
 
-    case DELETE_AREA_SUCCESS:{
+    case DELETE_INGREDIENTUNIT_SUCCESS: {
       return {
         ...state,
         isLoading: false,
@@ -67,7 +67,7 @@ export const addAreaReducer = (
     }
 
     default: {
-        return state;
-      }
+      return state;
+    }
   }
 };
