@@ -14,8 +14,8 @@ import {
 } from "../../../../components/index";
 import useFormValidator from "../../../../utils";
 import { addArea_schema } from "../../../../validations/itemsValidations";
-import { addAreaData } from "../../../../redux/AddArea/addArea.action";
-import { useDispatch } from "react-redux";
+ import { useDispatch } from "react-redux";
+import { addAreaData } from "../../../../redux/Settings/Area/addArea.action";
 
 const Content = () => {
   const [inputValues, setInputValues] = useState("");

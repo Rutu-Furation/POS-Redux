@@ -8,12 +8,21 @@ import {
   SideBar_Links,
   callApi,
 } from "../../../../components/index";
+import { useDispatch, useSelector } from "react-redux";
+import { getAreaData } from "../../../../redux/Settings/Area/addArea.action";
 
 const Content = () => {
   const [Table, setTable] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const { isloading, isError, AreaData } = useSelector(
+    (state) => state.addArea
+  );
+  const dispatch = useDispatch();
+  console.log("Area", AreaData.areas);
+ 
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -33,7 +42,9 @@ const Content = () => {
     // Implement the exportToCsv functionality here
     console.log("Exporting CSV...");
   };
-
+ useEffect(() => {
+    dispatch(getAreaData());
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
