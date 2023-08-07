@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Tables.css";
 import { Link, useNavigate } from "react-router-dom";
 import "aos/dist/aos.css";
@@ -14,23 +14,24 @@ import {
 // import { GiHamburgerMenu } from "react-icons/gi";
 import POS_Nav from "../POS_Nav/POS_Nav";
 import { useSelector, useDispatch } from "react-redux";
-import { getTableList } from "../../../redux/table/table.action";
+import { getAreaData } from "../../../redux/Settings/Area/addArea.action";
 // import POS_Nav from "../POS_Nav/POS_Nav";
 
 const Tables = () => {
-  const { isLoading, isError, TableListData } = useSelector(
-    (store) => store.table
+  const TableListData = [];
+  const { isLoading, isError, AreaData } = useSelector(
+    (state) => state.addArea
   );
 
   const disPatch = useDispatch();
-  useEffect(() => {
-    disPatch(getTableList());
-  }, []);
+
   console.log(isLoading);
 
   useEffect(() => {
+    disPatch(getAreaData());
     AOS.init();
   }, []);
+
   const nav = useNavigate();
   const [selectedTable, setSelectedTable] = useState("");
   const saveDataToLocalStorage = (data) => {
@@ -48,10 +49,6 @@ const Tables = () => {
     }
   }, [selectedTable]);
 
-  // const GetArea = async () => {
-  //   const res = await callApi("GET", "/setting/area/list");
-  //   return res.areas;
-  // };
   const orderStatusColors = {
     Running: "#9ddbfb",
     Printed: "#9ce37b",
@@ -59,20 +56,9 @@ const Tables = () => {
     KOT: "#fee181",
   };
 
-  // const {
-  //   data: areaData,
-  //   isLoading,
-  //   isError,
-  //   error,
-  //   isSuccess,
-  //   isFetching,
-  // } = useQuery("areaData", GetArea);
-
   if (isLoading) {
     return <Loading />;
   }
-
-     
 
   if (isError) {
     return <div>There is a problem with fetching data</div>;
@@ -132,7 +118,7 @@ const Tables = () => {
       </div>
 
       <div className="p-3">
-        {TableListData?.map((item, index) => (
+        {AreaData.areas?.map((item, index) => (
           <div className="row g-2 mb-5" key={index}>
             <div className="col-12">
               <p className="text-capitalize">{item?.area_name}</p>

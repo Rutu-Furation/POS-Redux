@@ -17,7 +17,7 @@ import { Loading, callApi, toast, Toaster, Pagination } from "../index";
 import TableHeader from "./Table_Headers";
 import TableDataPrint from "./TableDataPrint/TableDataPrint";
 import PdfExportButton from "./PDFGenerator/PDFGenerator ";
-import { deleteAreaData } from "../../redux/AddArea/addArea.action";
+import { deleteAreaData } from "../../redux/Settings/Area/addArea.action";
 import { useDispatch } from "react-redux";
 
 const TableComponent = ({
