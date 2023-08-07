@@ -1,0 +1,26 @@
+.print-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+  }
+  
+  .print-table th,
+  .print-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .print-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+  }
+  
+  .hidden-print {
+    border: 1px solid red;
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+  }
+  

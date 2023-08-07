@@ -79,6 +79,7 @@ const Content = () => {
           endPage={3}
           pageNumbers={[1, 2, 3]}
           categories={categories}
+          pagename="Food Menu"
         />
       </div>
     </>

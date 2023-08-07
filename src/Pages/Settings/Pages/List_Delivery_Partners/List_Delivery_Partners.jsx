@@ -88,6 +88,7 @@ const List_Delivery_Partners = () => {
                   startPage={1}
                   endPage={3}
                   pageNumbers={[1, 2, 3]}
+                  pagename="Delivery Partners"
                 />
               </div>
             </div>

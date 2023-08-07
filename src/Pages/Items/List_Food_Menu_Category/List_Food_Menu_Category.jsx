@@ -63,6 +63,7 @@ const Content = () => {
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
+          pagename="Food Menu Category"
         />
       </div>
     </>
