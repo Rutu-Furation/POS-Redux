@@ -87,19 +87,17 @@ const TableComponent = ({
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
-  const dispatch = useDispatch();
-
+ 
   const handleDelete = async (dataId) => {
-    dispatch(deleteAreaData(dataId));
-    // try {
-    //   let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);
-    //   toast.success("Item deleted successfully");
-    //   playSoundEffect();
-    //   const updatedData = initialData.filter((item) => item.id !== dataId);
-    //   setInitialData(updatedData);
-    // } catch (error) {
-    //   toast.error("Failed to delete item:", error);
-    // }
+    try {
+      let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);
+      toast.success("Item deleted successfully");
+      playSoundEffect();
+      const updatedData = initialData.filter((item) => item.id !== dataId);
+      setInitialData(updatedData);
+    } catch (error) {
+      toast.error("Failed to delete item:", error);
+    }
   };
 
   const playSoundEffect = () => {
