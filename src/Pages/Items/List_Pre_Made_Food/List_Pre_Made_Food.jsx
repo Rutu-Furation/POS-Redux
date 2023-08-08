@@ -72,7 +72,7 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-          totalPages={Math.ceil(preMadeFood.length / rowsPerPage)}
+          totalPages={Math.ceil(preMadeFood?.length / rowsPerPage)}
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
