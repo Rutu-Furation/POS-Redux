@@ -1,3 +1,4 @@
+// ingredients endpoints
 const ingredientsEndpoints = {
   getAllIngredients: "/setting/ingredients/list",
   getIngredientById: (id) => `/setting/ingredient/${id}`,
