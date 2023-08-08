@@ -41,3 +41,16 @@ export const deletemodifier = (id) => async (dispatch) => {
     toast.error("Failed to Delete Modifier");
   }
 };
+
+export const getmodifier = () => async (dispatch) => {
+  dispatch({ type: GET_MODIFIER_LOADIGN });
+  try {
+    let res = await axios.get(`${baseURL}/setting/modifier/list`);
+    console.log("res", res);
+    if (res.data) {
+      dispatch({ type: GET_MODIFIER_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    dispatch({ type: GET_MODIFIER_ERROR, payload: error.message });
+  }
+};

@@ -17,6 +17,7 @@ import {
 
 import useFormValidator from "../../../../utils";
 import { addTable_schema } from "../../../../validations/itemsValidations";
+import { useDispatch } from "react-redux";
 const Add_Table = () => {
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
@@ -76,21 +77,23 @@ const Add_Table = () => {
     const audio = new Audio(soundURL);
     audio.play();
   };
+  const dispatch = useDispatch();
   const addTable = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      try {
-        setLoading(true);
-        const res = await callApi("POST", "/setting/table/new", finalObj);
-        console.log(res);
-        toast.success("Table added successfully");
-        playSoundEffect();
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to add table");
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   setLoading(true);
+      //   const res = await callApi("POST", "/setting/table/new", finalObj);
+      //   console.log(res);
+      //   toast.success("Table added successfully");
+      //   playSoundEffect();
+      // } catch (error) {
+      //   console.error(error);
+      //   toast.error("Failed to add table");
+      // } finally {
+      //   setLoading(false);
+      // }
+      dispatch(addTable(finalObj));
     }
   };
 
@@ -309,7 +312,6 @@ const Add_Table = () => {
                         btnTxt="Submit"
                         loading={loading}
                       >
-                    
                         {loading ? (
                           <span
                             className="spinner-border spinner-border-sm"

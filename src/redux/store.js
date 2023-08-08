@@ -13,16 +13,16 @@ import { premadefoodReducer } from "./Items/PreMadeFood/PreMadeFood.reducer";
 import { modifierReducer } from "./Items/Modifier/Modifier.reducer";
 import { IngredientcategoryReducer } from "./Items/IngredientsCategory/IngredientsCategory.reducer";
 import { tableListReducer } from "./Settings/table/table.reducer";
-import { addAreaReducer } from "./Settings/Area/addArea.reducer";
+import { areaReducer } from "./Settings/Area/addArea.reducer";
  
 const rootReducer = combineReducers({
   table: tableListReducer,
-  addArea: addAreaReducer,
+  Area: areaReducer,
   // foodMenu: FoodMenuReducer,
   // IngredientsUnit: IngredientUnitReducer,
   // Ingredient: IngredientReducer,
   // premadefood: premadefoodReducer,
-  // modifier: modifierReducer,
+  modifier: modifierReducer,
   // Ingredientcategory: IngredientcategoryReducer,
 });
 

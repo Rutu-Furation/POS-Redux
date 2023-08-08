@@ -8,13 +8,26 @@ import {
 const baseURL = "https://famous-bear-kimono.cyclic.app";
 
 export const getTableList = () => async (dispatch) => {
-  dispatch({ type: TABLE_LIST_LOADING });
+  dispatch({ type: GET_TABLE_LOADING });
   try {
     let res = await axios.get(`${baseURL}/setting/area/list`);
     if (res.data) {
-      dispatch({ type: TABLE_LIST_SUCCESS, payload: res.data.areas });
+      dispatch({ type: GET_TABLE_SUCCESS, payload: res.data.areas });
     }
   } catch (error) {
-    dispatch({ type: TABLE_LIST_ERROR, payload: error.message });
+    dispatch({ type: GET_TABLE_ERROR, payload: error.message });
+  }
+};
+
+export const addTable = (objdata) => async (dispatch) => {
+  dispatch({ type: ADD_TABLE_LOADING });
+  try {
+    let res = await axios.get(`${baseURL}/setting/area/new`, objdata);
+    console.log("res", res);
+    if (res) {
+      dispatch({ type: ADD_TABLE_SUCCESS, payload: res.data.areas });
+    }
+  } catch (error) {
+    dispatch({ type: ADD_TABLEERROR, payload: error.message });
   }
 };

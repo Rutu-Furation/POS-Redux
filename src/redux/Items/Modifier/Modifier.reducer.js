@@ -5,6 +5,12 @@ import {
   DELETE_MODIFIER_LOADING,
   DELETE_MODIFIER_ERROR,
   DELETE_MODIFIER_SUCCESS,
+  GET_MODIFIER_ERROR,
+  GET_MODIFIER_LOADING,
+  GET_MODIFIER_SUCCESS,
+  UPDATE_MODIFIER_ERROR,
+  UPDATE_MODIFIER_LOADING,
+  UPDATE_MODIFIER_SUCCESS
 } from "./Modifier.actionType.js";
 
 const modifierDataInitialState = {
@@ -41,6 +47,31 @@ export const modifierReducer = (
         TableListData: payload,
       };
     }
+
+    case GET_MODIFIER_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case GET_MODIFIER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case GET_MODIFIER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        TableListData: payload,
+      };
+    }
+
 
     case DELETE_MODIFIER_LOADING: {
       return {

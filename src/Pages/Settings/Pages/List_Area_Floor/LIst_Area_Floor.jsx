@@ -7,12 +7,22 @@ import {
   SideBar,
   SideBar_Links,
 } from "../../../../components/index";
+import { getAreaData } from "../../../../redux/Settings/Area/addArea.action";
+import { useDispatch, useSelector } from "react-redux";
 
 const List_Area_Floor = () => {
-  const [AreaData, setAreaData] = useState([]);
+  const [Areadata, setAreadata] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const { isloading, isError, AreaData } = useSelector((state) => state.Area);
+
+console.log("AreaData",AreaData.areas)
+const dispatch=useDispatch()
+  useEffect(() => {
+    dispatch(getAreaData());
+  }, []);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -39,13 +49,13 @@ const List_Area_Floor = () => {
         const res = await callApi("GET", "/setting/area/list");
 
         console.log("/setting/area", res.areas);
-        const updatedData = res.areas.map((item) => ({
+        const updatedData = AreaData.areas.map((item) => ({
           Outlet: item.outlet_id.outlet_name || "outlet",
           Name: item.area_name || "area name",
           description: item.description || "description",
           id: item._id || "",
         }));
-        setAreaData(updatedData);
+        setAreadata(updatedData);
       } catch (error) {
         console.error("Error fetching ingredients:", error);
       }
@@ -71,7 +81,7 @@ const List_Area_Floor = () => {
               <div className="  w-100">
                 <TableComponent
                   PageName="listIngredients"
-                  data={AreaData}
+                  data={Areadata}
                   deleteRoute="/setting/area/delete"
                   currentPage={currentPage}
                   rowsPerPage={rowsPerPage}
@@ -80,7 +90,7 @@ const List_Area_Floor = () => {
                   handlePageChange={handlePageChange}
                   handleRowsPerPageChange={handleRowsPerPageChange}
                   exportToCsv={exportToCsv}
-                  totalPages={Math.ceil(AreaData.length / rowsPerPage)}
+                  totalPages={Math.ceil(Areadata.length / rowsPerPage)}
                   startPage={1}
                   endPage={3}
                   pageNumbers={[1, 2, 3]}
