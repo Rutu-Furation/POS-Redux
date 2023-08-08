@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Main_Layout, TableComponent, callApi } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getmodifier } from "../../../redux/Items/Modifier/Modifier.action.js";
 
 const Content = () => {
   const [modifier, setModifier] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const dispatch = useDispatch()
+
+  const {isLoading, isError, modifierData} = useSelector((state) => state.modifier)
+ 
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -28,10 +35,11 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await callApi("GET", "/setting/modifier/list");
+      // const res = await callApi("GET", "/setting/modifier/list");
+      dispatch(getmodifier())
 
-      console.log("list modifier", res.modifier);
-      const updatedData = res.modifier.map((item) => ({
+      // console.log("list modifier", res.modifier);
+      const updatedData = modifierData.modifier.map((item) => ({
         "Category Name": item.foodCategory?.name || "Nan",
         Price: item.price || "price",
 

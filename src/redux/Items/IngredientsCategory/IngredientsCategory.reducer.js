@@ -16,7 +16,7 @@ import {
 const IngredientcategoryDataInitialState = {
   isLoading: false,
   isError: false,
-  IngredientcategoryData: [],
+  IngredientCategoryData: [],
 };
 
 export const IngredientcategoryReducer = (
