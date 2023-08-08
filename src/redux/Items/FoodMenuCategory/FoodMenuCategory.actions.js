@@ -29,7 +29,7 @@ export const getFoodMenuCategory = () => async (dispatch) => {
     );
     console.log("res", res);
     if (res) {
-      dispatch({ type: GET_FOODMENUCATEGORY_SUCCESS, payload: res });
+      dispatch({ type: GET_FOODMENUCATEGORY_SUCCESS, payload: res.data });
     }
   } catch (error) {
     dispatch({ type: GET_FOODMENUCATEGORY_ERROR, payload: error.message });

@@ -16,8 +16,7 @@ const Content = () => {
   const { isLoading, isError, FoodMenuCategoryData } = useSelector(
     (state) => state.FoodMenuCategory
   );
-  console.log("FoodMenuCategoryData", FoodMenuCategoryData.data.foodCategory);
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFoodMenuCategory());
   }, []);
@@ -42,9 +41,7 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-   
-
-      const updatedData = FoodMenuCategoryData?.data?.foodCategory?.map(
+      const updatedData = FoodMenuCategoryData?.foodCategory?.map(
         (item) => ({
           "Category Name": item.name || "Nan",
           Description: item.description,

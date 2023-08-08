@@ -36,7 +36,7 @@ export const getIngredients = () => async (dispatch) => {
 
 
 
-export const addIngredient = (newData) => async (dispatch) => {
+export const addnewIngredient = (newData) => async (dispatch) => {
 
   dispatch({ type: ADD_INGREDIENT_LOADING });
   try {
