@@ -382,7 +382,10 @@ const POS = () => {
                                 type="number"
                                 step="0.01"
                                 onChange={(e) =>
-                                  addDiscount(row, e.target.value)
+                                  addDiscount(
+                                    row,
+                                    e.target.value >= 100 ? 100 : e.target.value
+                                  )
                                 }
                               />
                             </td>

@@ -9,6 +9,8 @@ import {
 } from "../../../components/index.js";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addFoodMenuCategory_schema } from "../../../validations/itemsValidations.js";
+import { useDispatch } from "react-redux";
+import { addFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
 
 const Content = () => {
   const [categoryData, setCategoryData] = useState({
@@ -26,26 +28,27 @@ const Content = () => {
     categoryData,
     addFoodMenuCategory_schema
   );
-
+  const dispatch = useDispatch();
   const submitCategory = async () => {
     const validationErrors = validateForm();
 
     if (!validationErrors) {
-      try {
-        setLoading(true);
-        const res = await callApi(
-          "POST",
-          "/setting/foodCategory/new",
-          categoryData
-        );
-        console.log(res);
-        toast.success("Food Category added successfully");
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to add Food Category");
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   setLoading(true);
+      //   const res = await callApi(
+      //     "POST",
+      //     "/setting/foodCategory/new",
+      //     categoryData
+      //   );
+      //   console.log(res);
+      //   toast.success("Food Category added successfully");
+      // } catch (error) {
+      //   console.error(error);
+      //   toast.error("Failed to add Food Category");
+      // } finally {
+      //   setLoading(false);
+      // }
+      dispatch(addFoodMenuCategory(categoryData));
     }
   };
 

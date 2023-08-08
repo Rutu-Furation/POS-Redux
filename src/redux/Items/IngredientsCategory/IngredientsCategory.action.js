@@ -15,7 +15,7 @@ import {
 } from "./IngredientsCategory.actionType.js";
 
 import axios from "axios";
-import {baseURL} from '../../../api/apiConfig.js'
+import { baseURL } from "../../../api/apiConfig.js";
 import { ingredientCategoryEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
 export const getIngredientCategories = () => async (dispatch) => {
@@ -36,7 +36,7 @@ export const addIngredientcategory = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENTCATEGORY_LOADING });
   try {
     let res = await axios.post(
-      baseURL+ingredientCategoryEndpoints.addIngredientCategory,
+      baseURL + ingredientCategoryEndpoints.addIngredientCategory,
       newData
     );
     console.log("res", res);
@@ -57,7 +57,7 @@ export const deleteAreaData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_INGREDIENTCATEGORY_LOADING });
   try {
     let res = await axios.delete(
-      baseURL+ingredientCategoryEndpoints.deleteIngredientCategory(id)
+      baseURL + ingredientCategoryEndpoints.deleteIngredientCategory(id)
     );
     console.log("res", res);
     if (res.data) {

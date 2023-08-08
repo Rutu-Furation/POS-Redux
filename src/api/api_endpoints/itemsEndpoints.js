@@ -47,6 +47,15 @@ const productFoodMenuEndpoints = {
   updateProductFoodMenu: (id) => `/setting/foodProduct/update/${id}`,
   deleteProductFoodMeny: (id) => `/setting/foodProduct/delete/${id}`,
 };
+
+const FoodMenuCategoryEndpoints = {
+  getFoodMenuCategory: `/setting/foodCategory/list`,
+  addFoodMenuCategory: `/setting/foodCategory/new`,
+  updateFoodMenuCategory: (id) => `/setting/foodCategory/update/${id}`,
+  deleteFoodMenuCategory: (id) => `/setting/foodCategory/delete/${id}`,
+  getFoodMenuCategoryById: (id) => `/setting/foodCategory/${id}`,
+};
+
 // Food Menu related apis end
 
 const modifiersEndpoints = {
@@ -62,10 +71,10 @@ const preMadeFoodEndpoints = {
   getPreMadeFoodById: (id) => `/setting/preMadeFood/${id}`,
   addPreMadeFood: `/setting/preFoodMade/new`,
   updatePreMadeFood: (id) => `/setting/preMadeFood/update/${id}`,
-  deletePreMadeFood: (id) => `/setting/preMadeFood/delete/${id}`
+
+  deletePreMadeFood: (id) => `/setting/preMadeFood/delete/${id}`,
+
 };
-
-
 
 export {
   ingredientsEndpoints,
@@ -76,4 +85,5 @@ export {
   productFoodMenuEndpoints,
   modifiersEndpoints,
   preMadeFoodEndpoints,
+  FoodMenuCategoryEndpoints,
 };

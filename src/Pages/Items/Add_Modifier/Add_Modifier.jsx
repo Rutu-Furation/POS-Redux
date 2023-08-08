@@ -17,10 +17,8 @@ import { useDispatch } from "react-redux";
 const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
-  //STATE FOR INPUTS
   const [inputValues, setInputValues] = useState("");
 
-  //FETCHING INGREDIENTS
   const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);
   useEffect(() => {
@@ -41,7 +39,6 @@ const Content = () => {
     costUnit: item.costUnit,
     code: item.code,
   }));
-  // console.log(ingredientOptions);
 
   //FUNCTION FOR HANDLING INPUT DATA
   const handleInputData = (e) => {
@@ -115,7 +112,6 @@ const Content = () => {
     })),
   };
 
-  console.log(finalObj.ingredients);
   const dispatch = useDispatch();
   const handelAddModifier = async () => {
     const validationErrors = validateForm();
@@ -131,6 +127,7 @@ const Content = () => {
       // } finally {
       //   setLoading(false);
       // }
+      console.log("finalObj", finalObj);
       dispatch(addmodifier(finalObj));
     }
   };

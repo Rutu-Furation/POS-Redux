@@ -4,6 +4,8 @@ import {
   TableComponent,
   Main_Layout,
 } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
 
 const Content = () => {
   const [FoodMenuCategory, setFoodMenuCategory] = useState([]);
@@ -11,6 +13,14 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
+  const { isLoading, isError, FoodMenuCategoryData } = useSelector(
+    (state) => state.FoodMenuCategory
+  );
+  console.log("FoodMenuCategoryData", FoodMenuCategoryData.data.foodCategory);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getFoodMenuCategory());
+  }, []);
   const handleSearch = (e) => {
     setSearchText(e.target.value);
     setCurrentPage(1);
@@ -32,14 +42,15 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await callApi("GET", "/setting/foodcategory/list");
-      console.log("foodCategoryData", res.foodCategory);
+   
 
-      const updatedData = res.foodCategory.map((item) => ({
-        "Category Name": item.name || "Nan",
-        Description: item.description,
-        id: item._id || "",
-      }));
+      const updatedData = FoodMenuCategoryData?.data?.foodCategory?.map(
+        (item) => ({
+          "Category Name": item.name || "Nan",
+          Description: item.description,
+          id: item._id || "",
+        })
+      );
       setFoodMenuCategory(updatedData);
     };
     fetchData();
