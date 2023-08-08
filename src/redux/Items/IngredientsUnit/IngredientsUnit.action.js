@@ -15,15 +15,16 @@ import {
 } from "./IngredientsUnit.actionType.js";
 
 import axios from "axios";
-
- 
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import { baseURL } from "../../../api/apiConfig.js";
+import { ingredientUnitsEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
 export const addIngredientUnit = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENTUNIT_LOADING });
   try {
-    let res = await axios.post(`${baseURL}/setting/ingredientunit/new`, newData);
+    let res = await axios.post(
+      baseURL + ingredientUnitsEndpoints.addIngredientUnit,
+      newData
+    );
     console.log("res", res);
     if (res.data) {
       dispatch({ type: ADD_INGREDIENTUNIT_SUCCESS, payload: res.data });
@@ -38,7 +39,9 @@ export const addIngredientUnit = (newData) => async (dispatch) => {
 export const deleteAreaData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_INGREDIENTUNIT_LOADING });
   try {
-    let res = await axios.delete(`${baseURL}/setting/ingredientunit/delete/${id}`);
+    let res = await axios.delete(
+      baseURL + ingredientUnitsEndpoints.deleteIngredientUnit(id)
+    );
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_INGREDIENTUNIT_SUCCESS, payload: res.data });

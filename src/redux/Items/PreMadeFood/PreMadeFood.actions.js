@@ -15,13 +15,13 @@ import {
 } from "./PreMadeFood.actionType.js";
 
 import axios from "axios";
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import { baseURL } from "../../../api/apiConfig.js";
+import { preMadeFoodEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
 export const addpremadefood = (newData) => async (dispatch) => {
   dispatch({ type: ADD_PREMADEFOOD_LOADING });
   try {
-    let res = await axios.post(`${baseURL}/setting/premade/new`, newData);
+    let res = await axios.post(baseURL+preMadeFoodEndpoints.addPreMadeFood, newData);
     console.log("res", res);
     if (res.data) {
       dispatch({ type: ADD_PREMADEFOOD_SUCCESS, payload: res.data });
@@ -36,7 +36,7 @@ export const addpremadefood = (newData) => async (dispatch) => {
 export const deletepremadefood = (id) => async (dispatch) => {
   dispatch({ type: DELETE_PREMADEFOOD_LOADING });
   try {
-    let res = await axios.delete(`${baseURL}/setting/premadefood/delete/${id}`);
+    let res = await axios.delete(baseURL+preMadeFoodEndpoints.deletePreMadeFood(id));
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_PREMADEFOOD_SUCCESS, payload: res.data });

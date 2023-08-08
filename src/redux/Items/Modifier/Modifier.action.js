@@ -15,13 +15,15 @@ import {
 } from "./Modifier.actionType.js";
 
 import axios from "axios";
+import { baseURL } from "../../../api/apiConfig.js";
+import { modifiersEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
 const baseURL = "https://famous-bear-kimono.cyclic.app";
 
 export const addmodifier = (newData) => async (dispatch) => {
   dispatch({ type: ADD_MODIFIER_LOADING });
   try {
-    let res = await axios.post(`${baseURL}/setting/modifier/new`, newData);
+    let res = await axios.post(baseURL+modifiersEndpoints.addModifier, newData);
     console.log("res", res);
     if (res.data) {
       dispatch({ type: ADD_MODIFIER_SUCCESS, payload: res.data });
@@ -36,7 +38,8 @@ export const addmodifier = (newData) => async (dispatch) => {
 export const deletemodifier = (id) => async (dispatch) => {
   dispatch({ type: DELETE_MODIFIER_LOADING });
   try {
-    let res = await axios.delete(`${baseURL}/setting/modifier/delete/${id}`);
+    // let res = await axios.delete(`${baseURL}/setting/modifier/delete/${id}`);
+    let res = await axios.delete(baseURL+modifiersEndpoints.deleteModifier(id))
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_MODIFIER_SUCCESS, payload: res.data });
