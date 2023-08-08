@@ -18,8 +18,8 @@ const List_Area_Floor = () => {
 
   const { isloading, isError, AreaData } = useSelector((state) => state.Area);
 
-console.log("AreaData",AreaData.areas)
-const dispatch=useDispatch()
+  console.log("AreaData", AreaData.areas);
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAreaData());
   }, []);
@@ -46,9 +46,6 @@ const dispatch=useDispatch()
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await callApi("GET", "/setting/area/list");
-
-        console.log("/setting/area", res.areas);
         const updatedData = AreaData.areas.map((item) => ({
           Outlet: item.outlet_id.outlet_name || "outlet",
           Name: item.area_name || "area name",

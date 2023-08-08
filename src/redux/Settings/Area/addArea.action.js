@@ -9,6 +9,9 @@ import {
   GET_AREA_SUCCESS,
   GET_AREA_LOADING,
   GET_AREA_ERROR,
+  UPDATE_AREA_SUCCESS,
+  UPDATE_AREA_LOADING,
+  UPDATE_AREA_ERROR,
 } from "./addArea.actionType";
 import axios from "axios";
 
@@ -59,3 +62,23 @@ export const deleteAreaData = (id) => async (dispatch) => {
     toast.error("Failed to add Area/Floor");
   }
 };
+
+export const updateAreaData =
+  ({ id, newobjData }) =>
+  async (dispatch) => {
+    dispatch({ type: UPDATE_AREA_LOADING });
+    try {
+      let res = await axios.update(
+        `${baseURL}/setting/area/delete/${id}`,
+        newobjData
+      );
+      console.log("res", res);
+      if (res.data) {
+        dispatch({ type: UPDATE_AREA_SUCCESS, payload: res.data });
+        toast.success("Area/Floor update successfully");
+      }
+    } catch (error) {
+      dispatch({ type: UPDATE_AREA_ERROR, payload: error.message });
+      toast.error("Failed to update Area/Floor");
+    }
+  };

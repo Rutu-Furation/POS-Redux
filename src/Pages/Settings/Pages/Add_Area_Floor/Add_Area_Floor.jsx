@@ -14,7 +14,7 @@ import {
 } from "../../../../components/index";
 import useFormValidator from "../../../../utils";
 import { addArea_schema } from "../../../../validations/itemsValidations";
- import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addAreaData } from "../../../../redux/Settings/Area/addArea.action";
 
 const Content = () => {
@@ -69,15 +69,14 @@ const Content = () => {
   // const  { isLoading,
   //   isError,
   //   AreaData,} = useSelector((store)=>store.addArea)
-  
-    const disPatch = useDispatch()
-     
-    // console.log(TableListData)
+
+  const disPatch = useDispatch();
+
+  // console.log(TableListData)
   // ======================
   console.log(finalObj);
 
   const handleSubmit = async () => {
-    
     const validationErrors = validateForm();
     if (!validationErrors) {
       // try {
@@ -91,7 +90,7 @@ const Content = () => {
       // } finally {
       //   setLoading(false);
       // }
-      disPatch(addAreaData(finalObj))
+      disPatch(addAreaData(finalObj));
     }
   };
   const formStructure = [
@@ -137,7 +136,7 @@ const Content = () => {
           e.preventDefault();
 
           handleSubmit();
-        }}   
+        }}
       >
         <div className="row">
           {formStructure.map((fields, index) => (
