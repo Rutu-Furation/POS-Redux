@@ -11,6 +11,8 @@ import {
 import { FoodContext } from "../../../context/FoodContext.jsx";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addIngredient_schema } from "../../../validations/itemsValidations.js";
+import { useDispatch } from "react-redux";
+import { addnewIngredient } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
 const Content = () => {
   const { units, fetchUnits } = useContext(FoodContext);
@@ -71,22 +73,25 @@ const Content = () => {
     addIngredient_schema
   );
 
+  const dispatch = useDispatch();
+
   const handleAddIngredient = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      try {
-        // Set loading to true to show the spinner
-        setLoading(true);
-        const res = await callApi("POST", addIngredient, newIngredient);
-        console.log("res", res);
-        toast.success("Ingredient added successfully");
-      } catch (error) {
-        console.error(error);
-        toast.error(error.message);
-      } finally {
-        // Set loading to false to hide the spinner
-        setLoading(false);
-      }
+      // try {
+      //   // Set loading to true to show the spinner
+      //   setLoading(true);
+      //   const res = await callApi("POST", addIngredient, newIngredient);
+      //   console.log("res", res);
+      //   toast.success("Ingredient added successfully");
+      // } catch (error) {
+      //   console.error(error);
+      //   toast.error(error.message);
+      // } finally {
+      //   // Set loading to false to hide the spinner
+      //   setLoading(false);
+      // }
+      dispatch(addnewIngredient(newIngredient));
     }
   };
   console.log("loading", loading);

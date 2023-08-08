@@ -24,7 +24,6 @@ export const IngredientUnitReducer = (
   { type, payload }
 ) => {
   switch (type) {
-
     case GET_INGREDIENTUNIT_LOADING: {
       return {
         ...state,
@@ -48,9 +47,6 @@ export const IngredientUnitReducer = (
         IngredientUnitsData: payload,
       };
     }
-
-
-
 
     case ADD_INGREDIENTUNIT_LOADING: {
       return {
@@ -76,8 +72,6 @@ export const IngredientUnitReducer = (
       };
     }
 
-
-
     case UPDATE_INGREDIENTUNIT_LOADING: {
       return {
         ...state,
@@ -101,9 +95,6 @@ export const IngredientUnitReducer = (
         IngredientUnitsData: payload,
       };
     }
-
-
-
 
     case DELETE_INGREDIENTUNIT_LOADING: {
       return {

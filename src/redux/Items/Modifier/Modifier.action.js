@@ -18,14 +18,13 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig.js";
 import { modifiersEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
-const baseURL = "https://famous-bear-kimono.cyclic.app";
-
+ 
 export const addmodifier = (newData) => async (dispatch) => {
   dispatch({ type: ADD_MODIFIER_LOADING });
   try {
-    let res = await axios.post(baseURL+modifiersEndpoints.addModifier, newData);
+    let res = await axios.post(baseURL + modifiersEndpoints.addModifier, newData);
     console.log("res", res);
-    if (res.data) {
+    if (res) {
       dispatch({ type: ADD_MODIFIER_SUCCESS, payload: res.data });
       toast.success("Modifier added successfully");
     }

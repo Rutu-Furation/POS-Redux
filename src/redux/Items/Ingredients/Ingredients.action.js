@@ -18,7 +18,7 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig";
 import { ingredientsEndpoints } from "../../../api/api_endpoints/itemsEndpoints";
 
-export const addIngredient = (newData) => async (dispatch) => {
+export const addnewIngredient = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENT_LOADING });
   try {
     let res = await axios.post(

@@ -10,6 +10,8 @@ import {
 import * as yup from "yup";
 import useFormValidator from "../../../utils";
 import { addIngredientUnit_Schema } from "../../../validations/itemsValidations.js";
+import { useDispatch } from "react-redux";
+import { addIngredientUnit } from "../../../redux/Items/IngredientsUnit/IngredientsUnit.action.js";
 
 const Content = () => {
   const [credentials, setCredentials] = useState("");
@@ -30,33 +32,31 @@ const Content = () => {
     finalObj,
     addIngredientUnit_Schema
   );
-
+const dispatch=useDispatch()
   const submitUnit = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
       // Form data is valid, proceed with form submission or other actions
-      console.log("Form data is valid:", true);
-      try {
-        setLoading(true);
-        let res = await callApi(
-          "POST",
-          "/setting/ingredientUnit/new",
-          finalObj
-        );
-        console.log(res);
-        toast.success("Ingresient Unit added successfully");
-      } catch (error) {
-        console.error(error);
-        toast.error("Failed to add Ingredient");
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      // Form data is invalid, handle errors or show error messages
-      console.log("Form data is invalid:", validationErrors);
-    }
+      // console.log("Form data is valid:", true);
+      // try {
+      //   setLoading(true);
+      //   let res = await callApi(
+      //     "POST",
+      //     "/setting/ingredientUnit/new",
+      //     finalObj
+      //   );
+      //   console.log(res);
+      //   toast.success("Ingresient Unit added successfully");
+      // } catch (error) {
+      //   console.error(error);
+      //   toast.error("Failed to add Ingredient");
+      // } finally {
+      //   setLoading(false);
+      // }
+      dispatch(addIngredientUnit(finalObj))
+    }  
   };
-  console.log("loading", loading);
+  console.log("loading");
 
   const formStructure = [
     {

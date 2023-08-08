@@ -42,14 +42,11 @@ const addModifier_schema = yup.object().shape({
     .min(1, "price should be more then 00")
 
     .required("Price is Required"),
-  ingredient: yup
-    .string()
-
-    .required("ingredient is Required"),
+ 
 
   //select ingredients is pending
 });
-  //select ingredients is pending
+//select ingredients is pending
 const addFoodMenu_schema = yup.object().shape({
   name: yup
     .string()
@@ -127,7 +124,7 @@ const addTable_schema = yup.object().shape({
 const addArea_schema = yup.object().shape({
   outlet_id: yup
     .string()
-//select ingredients is pending
+    //select ingredients is pending
     .required("Select Outlet"),
   area_name: yup
     .string()
