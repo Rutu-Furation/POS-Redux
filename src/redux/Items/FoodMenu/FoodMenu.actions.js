@@ -15,13 +15,13 @@ import {
 } from "./FoodMenu.actionTypes";
 
 import axios from "axios";
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import {baseURL} from '../../../api/apiConfig'
+import {regularFoodMenuEndpoints} from '../../../api/api_endpoints/itemsEndpoints'
 
 export const GetFoodMenu = () => async (dispatch) => {
   dispatch({ type: GET_FOODMENU_LOADING });
   try {
-    let res = await axios.get(`${baseURL}/url`);
+    let res = await axios.get(baseURL+regularFoodMenuEndpoints.getRegularFoodMenu);
     console.log("res", res);
     if (res) {
       dispatch({ type: GET_FOODMENU_SUCCESS, payload: res });
@@ -34,7 +34,7 @@ export const GetFoodMenu = () => async (dispatch) => {
 export const AddFoodMenu = (newData) => async (dispatch) => {
   dispatch({ type: ADD_FOODMENU_LOADING });
   try {
-    let res = await axios.post(`${baseURL}/setting/foodMenu/new`, newData);
+    let res = await axios.post(baseURL+regularFoodMenuEndpoints.addRegularFoodMenu, newData);
     console.log("res", res);
     if (res.data) {
       dispatch({ type: ADD_FOODMENU_SUCCESS, payload: res.data });
@@ -49,7 +49,7 @@ export const AddFoodMenu = (newData) => async (dispatch) => {
 export const deleteAreaData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_FOODMENU_LOADING });
   try {
-    let res = await axios.delete(`${baseURL}/setting/foodMenu/delete/${id}`);
+    let res = await axios.delete(baseURL+regularFoodMenuEndpoints.deleteRegularFoodMeny(id));
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_FOODMENU_SUCCESS, payload: res.data });

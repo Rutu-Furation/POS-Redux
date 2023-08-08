@@ -12,18 +12,17 @@ import {
   UPDATE_INGREDIENT_LOADING,
   UPDATE_INGREDIENT_ERROR,
   UPDATE_INGREDIENT_SUCCESS,
-
 } from "./Ingredients.actionType";
 
 import axios from "axios";
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import { baseURL } from "../../../api/apiConfig";
+import { ingredientsEndpoints } from "../../../api/api_endpoints/itemsEndpoints";
 
 export const addIngredient = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENT_LOADING });
   try {
     let res = await axios.post(
-      `${baseURL}/setting/ingredient/new`,
+      baseURL + ingredientsEndpoints.addIngredient,
       newData
     );
     console.log("res", res);
@@ -41,12 +40,12 @@ export const deleteAreaData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_INGREDIENT_LOADING });
   try {
     let res = await axios.delete(
-      `${baseURL}/setting/ingredient/delete/${id}`
+      baseURL + ingredientsEndpoints.deleteIngredient(id)
     );
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_INGREDIENT_SUCCESS, payload: res.data });
-      toast.success("Ingredient   Delete successfully");
+      toast.success("Ingredient Delete successfully");
     }
   } catch (error) {
     dispatch({ type: DELETE_INGREDIENT_ERROR, payload: error.message });
