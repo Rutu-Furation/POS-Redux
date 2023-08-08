@@ -5,12 +5,18 @@ import {
   Main_Layout,
   TableComponent,
 } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getPreMadeFood } from "../../../redux/Items/PreMadeFood/PreMadeFood.actions.js";
 
 const Content = () => {
   const [preMadeFood, setPreMadeFood] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const dispatch = useDispatch()
+
+  const {isLoading, isError, PreMadeFoodData} = useSelector((state) => state.premadefood)
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -33,9 +39,12 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await callApi("GET", "/setting/preFoodMade/list");
-      console.log("Res", res);
-      const updatedData = res.preFoodMade?.map((item) => ({
+      // const res = await callApi("GET", "/setting/preFoodMade/list");
+      // console.log("Res", res);
+
+      dispatch(getPreMadeFood())
+
+      const updatedData = PreMadeFoodData?.preFoodMade.map((item) => ({
         Code: item.code || "Nan",
         Name: item.nameFood || "Nan",
         "Purchase Price": item.purchasePrice || "Nan",

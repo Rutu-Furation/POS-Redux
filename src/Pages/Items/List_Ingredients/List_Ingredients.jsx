@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 import { Main_Layout, callApi, TableComponent } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
 const Content = () => {
   const [ingredientsData, setIngredientsData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const dispatch = useDispatch()
+
+  const { isLoading, isError, IngredientsData} = useSelector((state) => state.Ingredient)
+  // console.log(IngredientData)
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -30,10 +37,12 @@ const Content = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await callApi("GET", "/setting/ingredient/list");
+        // const res = await callApi("GET", "/setting/ingredient/list");
 
-        console.log("ingredientsall", res.ingredient);
-        const updatedData = res.ingredient?.map((item) => ({
+        dispatch(getIngredients())
+
+        // console.log("ingredientsall", res.ingredient);
+        const updatedData = IngredientsData?.ingredient.map((item) => ({
           Code: item.code,
           Name: item.name,
           Category: item.category?.ingredientCategory_name,

@@ -1,8 +1,8 @@
 // ingredients endpoints
 const ingredientsEndpoints = {
-  getAllIngredients: "/setting/ingredients/list",
+  getAllIngredients: "/setting/ingredient/list",
   getIngredientById: (id) => `/setting/ingredient/${id}`,
-  addIngredient: "/setting/ingredients/new",
+  addIngredient: "/setting/ingredient/new",
   updateIngredient: (id) => `/setting/ingredients/update/${id}`,
   deleteIngredient: (id) => `/setting/ingredient/delete/${id}`,
 };
@@ -58,11 +58,11 @@ const modifiersEndpoints = {
 };
 
 const preMadeFoodEndpoints = {
-  getAllPreMadeFood: `/setting/preMadeFood/list`,
+  getAllPreMadeFood: `/setting/preFoodMade/list`,
   getPreMadeFoodById: (id) => `/setting/preMadeFood/${id}`,
   addPreMadeFood: `/setting/preFoodMade/new`,
-  updatePreMadeFood: (id) `/setting/preMadeFood/update/${id}`,
-  deletePreMadeFood: (id) `/setting/preMadeFood/delete/${id}`
+  updatePreMadeFood: (id) => `/setting/preMadeFood/update/${id}`,
+  deletePreMadeFood: (id) => `/setting/preMadeFood/delete/${id}`
 };
 
 

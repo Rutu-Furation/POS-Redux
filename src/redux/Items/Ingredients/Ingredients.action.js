@@ -18,6 +18,22 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig";
 import { ingredientsEndpoints } from "../../../api/api_endpoints/itemsEndpoints";
 
+
+export const getIngredients = () => async (dispatch) => {
+  dispatch({ type: GET_INGREDIENT_LOADING });
+  try {
+    let res = await axios.get(baseURL+ingredientsEndpoints.getAllIngredients);
+    console.log("res", res);
+    if (res.data) {
+      dispatch({ type: GET_INGREDIENT_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    dispatch({ type: GET_INGREDIENT_ERROR, payload: error.message });
+  }
+};
+
+
+
 export const addIngredient = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENT_LOADING });
   try {

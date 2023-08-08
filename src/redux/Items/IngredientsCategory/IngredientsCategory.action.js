@@ -18,6 +18,20 @@ import axios from "axios";
 import {baseURL} from '../../../api/apiConfig.js'
 import { ingredientCategoryEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
+export const getIngredientCategories = () => async (dispatch) => {
+  dispatch({ type: GET_INGREDIENTCATEGORY_LOADING });
+  try {
+    let res = await axios.get(baseURL+ingredientCategoryEndpoints.getAllIngredientCategories);
+    console.log("res", res);
+    if (res.data) {
+      dispatch({ type: GET_INGREDIENTCATEGORY_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    dispatch({ type: GET_INGREDIENTCATEGORY_ERROR, payload: error.message });
+  }
+};
+
+
 export const addIngredientcategory = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENTCATEGORY_LOADING });
   try {

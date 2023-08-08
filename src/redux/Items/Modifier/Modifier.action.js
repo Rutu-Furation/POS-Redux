@@ -18,8 +18,6 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig.js";
 import { modifiersEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
-const baseURL = "https://famous-bear-kimono.cyclic.app";
-
 export const addmodifier = (newData) => async (dispatch) => {
   dispatch({ type: ADD_MODIFIER_LOADING });
   try {
@@ -52,9 +50,9 @@ export const deletemodifier = (id) => async (dispatch) => {
 };
 
 export const getmodifier = () => async (dispatch) => {
-  dispatch({ type: GET_MODIFIER_LOADIGN });
+  dispatch({ type: GET_MODIFIER_LOADING });
   try {
-    let res = await axios.get(`${baseURL}/setting/modifier/list`);
+    let res = await axios.get(baseURL+modifiersEndpoints.getAllModifiers);
     console.log("res", res);
     if (res.data) {
       dispatch({ type: GET_MODIFIER_SUCCESS, payload: res.data });
