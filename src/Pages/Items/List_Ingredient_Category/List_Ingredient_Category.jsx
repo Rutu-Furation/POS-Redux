@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Main_Layout, TableComponent, callApi } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredientCategories } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
 
 const Content = () => {
   const [ingredientsCategoryData, setIngredientsCategoryData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const dispatch = useDispatch()
+
+  const {isLoading, isError, IngredientCategoryData} = useSelector((state) => state.Ingredientcategory)
+  console.log(IngredientCategoryData)
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -30,8 +37,10 @@ const Content = () => {
     const fetchData = async () => {
       const res = await callApi("GET", "/setting/ingredientCategory/list");
 
+      dispatch(getIngredientCategories())
+
       console.log("ingredientCategory", res.ingredientCategory);
-      const updatedData = res.ingredientCategory.map((item) => ({
+      const updatedData = IngredientCategoryData.ingredientCategory.map((item) => ({
         Category: item.ingredientCategory_name,
         Description: item.description,
         "Added By": "Admin User",

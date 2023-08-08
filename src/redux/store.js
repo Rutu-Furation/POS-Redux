@@ -19,13 +19,20 @@ import { FoodMenuCategoryReducer } from "./Items/FoodMenuCategory/FoodMenuCatego
 const rootReducer = combineReducers({
   table: tableListReducer,
   Area: areaReducer,
+ 
   // foodMenu: FoodMenuReducer,
   IngredientsUnit: IngredientUnitReducer,
   // Ingredient: IngredientReducer,
   // premadefood: premadefoodReducer,
   FoodMenuCategory: FoodMenuCategoryReducer,
+ 
+  foodMenu: FoodMenuReducer,
+  IngredientsUnit: IngredientUnitReducer,
+  Ingredient: IngredientReducer,
+  premadefood: premadefoodReducer,
+ 
   modifier: modifierReducer,
-  // Ingredientcategory: IngredientcategoryReducer,
+  Ingredientcategory: IngredientcategoryReducer,
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

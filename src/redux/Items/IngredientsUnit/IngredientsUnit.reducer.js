@@ -16,7 +16,7 @@ import {
 const IngredientUnitDataInitialState = {
   isLoading: false,
   isError: false,
-  IngredientUnitData: [],
+  IngredientUnitsData: [],
 };
 
 export const IngredientUnitReducer = (

@@ -6,11 +6,18 @@ import {
   toast,
   Toaster,
 } from "../../../components/index.js";
+import { useDispatch, useSelector } from "react-redux";
+import { GetFoodMenu } from "../../../redux/Items/FoodMenu/FoodMenu.actions.js";
 const Content = () => {
   const [foodMenu, setFoodMenu] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
+
+  const dispatch = useDispatch()
+
+  const {isLoading, isError, FoodMenuData} = useSelector((state) => state.foodMenu)
+  console.log(FoodMenuData)
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -33,11 +40,11 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await callApi("GET", "/setting/foodmenu/list");
-      setFoodMenu(res.foodMenu);
-      console.log("listFoodMenu", res.foodMenu);
+      // const res = await callApi("GET", "/setting/foodmenu/list");
+      dispatch(GetFoodMenu())
+      setFoodMenu(FoodMenuData?.data.foodMenu);
 
-      const updatedData = res.foodMenu.map((item) => ({
+      const updatedData = FoodMenuData?.data?.foodMenu?.map((item) => ({
         "Food Menu Type": item.food_category?.name || "Nan",
         Code: item.code || "Code",
         Name: item.name || "name",

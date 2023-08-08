@@ -18,6 +18,21 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig.js";
 import { ingredientUnitsEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
+
+export const getIngredientUnits = () => async (dispatch) => {
+  dispatch({ type: GET_INGREDIENTUNIT_LOADING });
+  try {
+    let res = await axios.get(baseURL+ingredientUnitsEndpoints.getAllIngredientUnits);
+    console.log("res", res);
+    if (res.data) {
+      dispatch({ type: GET_INGREDIENTUNIT_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    dispatch({ type: GET_INGREDIENTUNIT_ERROR, payload: error.message });
+  }
+};
+
+
 export const addIngredientUnit = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENTUNIT_LOADING });
   try {

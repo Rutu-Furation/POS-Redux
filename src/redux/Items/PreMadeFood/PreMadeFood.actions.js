@@ -18,6 +18,21 @@ import axios from "axios";
 import { baseURL } from "../../../api/apiConfig.js";
 import { preMadeFoodEndpoints } from "../../../api/api_endpoints/itemsEndpoints.js";
 
+
+export const getPreMadeFood = () => async (dispatch) => {
+  dispatch({ type: GET_PREMADEFOOD_LOADING });
+  try {
+    let res = await axios.get(baseURL+preMadeFoodEndpoints.getAllPreMadeFood);
+    console.log("res", res);
+    if (res.data) {
+      dispatch({ type: GET_PREMADEFOOD_SUCCESS, payload: res.data });
+    }
+  } catch (error) {
+    dispatch({ type: GET_PREMADEFOOD_ERROR, payload: error.message });
+  }
+};
+
+
 export const addpremadefood = (newData) => async (dispatch) => {
   dispatch({ type: ADD_PREMADEFOOD_LOADING });
   try {
