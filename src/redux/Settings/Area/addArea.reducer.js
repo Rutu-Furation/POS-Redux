@@ -8,6 +8,9 @@ import {
   GET_AREA_LOADING,
   GET_AREA_ERROR,
   GET_AREA_SUCCESS,
+  UPDATE_AREA_LOADING,
+  UPDATE_AREA_ERROR,
+  UPDATE_AREA_SUCCESS,
 } from "./addArea.actionType";
 
 const AddAreaDataInitialState = {
@@ -16,7 +19,7 @@ const AddAreaDataInitialState = {
   AreaData: [],
 };
 
-export const addAreaReducer = (
+export const areaReducer = (
   state = AddAreaDataInitialState,
   { type, payload }
 ) => {
@@ -86,6 +89,30 @@ export const addAreaReducer = (
     }
 
     case DELETE_AREA_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+      };
+    }
+
+    case UPDATE_AREA_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case UPDATE_AREA_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case UPDATE_AREA_SUCCESS: {
       return {
         ...state,
         isLoading: false,

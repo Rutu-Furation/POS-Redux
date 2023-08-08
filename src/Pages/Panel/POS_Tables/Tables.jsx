@@ -19,18 +19,15 @@ import { getAreaData } from "../../../redux/Settings/Area/addArea.action";
 
 const Tables = () => {
   const TableListData = [];
-  const { isLoading, isError, AreaData } = useSelector(
-    (state) => state.addArea
-  );
+  const { isloading, isError, AreaData } = useSelector((state) => state.Area);
 
   const disPatch = useDispatch();
-
-  console.log(isLoading);
 
   useEffect(() => {
     disPatch(getAreaData());
     AOS.init();
   }, []);
+  console.log("tabledata", AreaData.areas.tables);
 
   const nav = useNavigate();
   const [selectedTable, setSelectedTable] = useState("");
@@ -56,7 +53,7 @@ const Tables = () => {
     KOT: "#fee181",
   };
 
-  if (isLoading) {
+  if (isloading) {
     return <Loading />;
   }
 
@@ -118,7 +115,7 @@ const Tables = () => {
       </div>
 
       <div className="p-3">
-        {AreaData.areas?.map((item, index) => (
+        {AreaData?.areas.map((item, index) => (
           <div className="row g-2 mb-5" key={index}>
             <div className="col-12">
               <p className="text-capitalize">{item?.area_name}</p>

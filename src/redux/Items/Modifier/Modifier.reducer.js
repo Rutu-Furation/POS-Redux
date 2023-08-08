@@ -11,6 +11,12 @@ import {
   DELETE_MODIFIER_LOADING,
   DELETE_MODIFIER_ERROR,
   DELETE_MODIFIER_SUCCESS,
+  GET_MODIFIER_ERROR,
+  GET_MODIFIER_LOADING,
+  GET_MODIFIER_SUCCESS,
+  UPDATE_MODIFIER_ERROR,
+  UPDATE_MODIFIER_LOADING,
+  UPDATE_MODIFIER_SUCCESS
 } from "./Modifier.actionType.js";
 
 const modifierDataInitialState = {
@@ -75,8 +81,10 @@ export const modifierReducer = (
       };
     }
 
+ 
 
     case UPDATE_MODIFIER_LOADING: {
+ 
       return {
         ...state,
         isLoading: true,
@@ -84,7 +92,9 @@ export const modifierReducer = (
       };
     }
 
+ 
     case UPDATE_MODIFIER_ERROR: {
+ 
       return {
         ...state,
         isLoading: false,
@@ -92,16 +102,18 @@ export const modifierReducer = (
       };
     }
 
+ 
     case UPDATE_MODIFIER_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         ModifierData: payload,
+ 
       };
     }
 
 
-
+ 
     case DELETE_MODIFIER_LOADING: {
       return {
         ...state,

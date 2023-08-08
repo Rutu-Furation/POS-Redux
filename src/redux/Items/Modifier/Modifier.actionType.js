@@ -11,5 +11,7 @@ export const GET_MODIFIER_ERROR = "getmodifier/error";
 export const GET_MODIFIER_SUCCESS = "getmodifier/success";
 
 export const UPDATE_MODIFIER_LOADING = "updatemodifier/loading";
-export const UPDATE_MODIFIER_ERROR = "updatemodifier/error";
+ 
+export const UPDATE_MODIFIER_ERROR =   "updatemodifier/error";
 export const UPDATE_MODIFIER_SUCCESS = "updatemodifier/success";
+ 

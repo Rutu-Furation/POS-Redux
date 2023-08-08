@@ -10,3 +10,8 @@ export const DELETE_AREA_SUCCESS = "deletearea/success"
 export const GET_AREA_LOADING = "getarea/loading"
 export const GET_AREA_ERROR =   "getarea/error"
 export const GET_AREA_SUCCESS = "getarea/success"
+
+
+export const UPDATE_AREA_LOADING = "updatearea/loading"
+export const UPDATE_AREA_ERROR =   "updatearea/error"
+export const UPDATE_AREA_SUCCESS = "updatearea/success"

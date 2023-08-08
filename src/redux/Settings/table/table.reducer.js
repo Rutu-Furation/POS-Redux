@@ -1,8 +1,17 @@
 import {
-  TABLE_LIST_ERROR,
-  TABLE_LIST_SUCCESS,
-  TABLE_LIST_LOADING,
-} from "./table.actionType";
+  GET_TABLE_ERROR,
+  GET_TABLE_LOADING,
+  GET_TABLE_SUCCESS,
+  UPDATE_TABLE_ERROR,
+  UPDATE_TABLE_LOADING,
+  UPDATE_TABLE_SUCCESS,
+  DELETE_TABLE_ERROR,
+  DELETE_TABLE_LOADING,
+  DELETE_TABLE_SUCCESS,
+  ADD_TABLE_ERROR,
+  ADD_TABLE_LOADING,
+  ADD_TABLE_SUCCESS,
+} from "./table.actionType.js";
 
 const tableInitialState = {
   isLoading: false,
@@ -15,29 +24,94 @@ export const tableListReducer = (
   { type, payload }
 ) => {
   switch (type) {
-    case TABLE_LIST_LOADING: {
+    case GET_TABLE_LOADING: {
       return {
         ...state,
         isLoading: true,
         isError: false,
       };
     }
-    case TABLE_LIST_ERROR: {
+    case GET_TABLE_ERROR: {
       return {
         ...state,
         isLoading: false,
         isError: true,
       };
     }
-    case TABLE_LIST_SUCCESS: {
+    case GET_TABLE_SUCCESS: {
       return {
         ...state,
         isLoading: false,
         TableListData: payload,
       };
     }
+
+    case ADD_TABLE_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+    case ADD_TABLE_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+    case ADD_TABLE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        TableListData: payload,
+      };
+    }
+    case DELETE_TABLE_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+    case DELETE_TABLE_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+    case DELETE_TABLE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+      };
+    }
+
+    case UPDATE_TABLE_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+    case UPDATE_TABLE_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+    case UPDATE_TABLE_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+
     default: {
-        return state;
-      }
+      return state;
+    }
   }
 };

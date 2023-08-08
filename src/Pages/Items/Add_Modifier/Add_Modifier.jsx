@@ -11,6 +11,8 @@ import {
 import { FoodContext } from "../../../context/FoodContext.jsx";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addModifier_schema } from "../../../validations/itemsValidations.js";
+import { addmodifier } from "../../../redux/Items/Modifier/Modifier.action.js";
+import { useDispatch } from "react-redux";
 
 const Content = () => {
   const [rows, setRows] = useState([]);
@@ -114,21 +116,22 @@ const Content = () => {
   };
 
   console.log(finalObj.ingredients);
-
+  const dispatch = useDispatch();
   const handelAddModifier = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      try {
-        setLoading(true);
-        let res = await callApi("POST", "/setting/modifier/new", finalObj);
-        console.log("Res", res);
-        toast.success("Modifier Added successfully");
-      } catch (err) {
-        console.log("err", err);
-        toast.error("Failed to Add Modifer");
-      } finally {
-        setLoading(false);
-      }
+      // try {
+      //   setLoading(true);
+      //   let res = await callApi("POST", "/setting/modifier/new", finalObj);
+      //   console.log("Res", res);
+      //   toast.success("Modifier Added successfully");
+      // } catch (err) {
+      //   console.log("err", err);
+      //   toast.error("Failed to Add Modifer");
+      // } finally {
+      //   setLoading(false);
+      // }
+      dispatch(addmodifier(finalObj));
     }
   };
   return (
@@ -181,7 +184,6 @@ const Content = () => {
               labelText="Ingredients Consumption"
               options={ingredientOptions}
               error={errors.ingredient}
-
               onChange={handleAddRow}
             />
           </div>
