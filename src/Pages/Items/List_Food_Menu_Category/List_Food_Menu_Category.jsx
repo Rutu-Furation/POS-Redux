@@ -16,7 +16,7 @@ const Content = () => {
   const { isLoading, isError, FoodMenuCategoryData } = useSelector(
     (state) => state.FoodMenuCategory
   );
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getFoodMenuCategory());
   }, []);
@@ -41,13 +41,11 @@ const Content = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const updatedData = FoodMenuCategoryData?.foodCategory?.map(
-        (item) => ({
-          "Category Name": item.name || "Nan",
-          Description: item.description,
-          id: item._id || "",
-        })
-      );
+      const updatedData = FoodMenuCategoryData?.foodCategory?.map((item) => ({
+        "Category Name": item.name || "Nan",
+        Description: item.description,
+        id: item._id || "",
+      }));
       setFoodMenuCategory(updatedData);
     };
     fetchData();
@@ -67,7 +65,9 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-          totalPages={Math.ceil(FoodMenuCategory.length / rowsPerPage)}
+          totalPages={Math.ceil(
+            FoodMenuCategoryData?.foodCategory?.length / rowsPerPage
+          )}
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
