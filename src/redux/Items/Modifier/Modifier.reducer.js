@@ -1,7 +1,13 @@
 import {
+  GET_MODIFIER_LOADING,
+  GET_MODIFIER_SUCCESS,
+  GET_MODIFIER_ERROR,
   ADD_MODIFIER_ERROR,
   ADD_MODIFIER_SUCCESS,
   ADD_MODIFIER_LOADING,
+  UPDATE_MODIFIER_LOADING,
+  UPDATE_MODIFIER_SUCCESS,
+  UPDATE_MODIFIER_ERROR,
   DELETE_MODIFIER_LOADING,
   DELETE_MODIFIER_ERROR,
   DELETE_MODIFIER_SUCCESS,
@@ -24,29 +30,6 @@ export const modifierReducer = (
   { type, payload }
 ) => {
   switch (type) {
-    case ADD_MODIFIER_LOADING: {
-      return {
-        ...state,
-        isLoading: true,
-        isError: false,
-      };
-    }
-
-    case ADD_MODIFIER_ERROR: {
-      return {
-        ...state,
-        isLoading: false,
-        isError: true,
-      };
-    }
-
-    case ADD_MODIFIER_SUCCESS: {
-      return {
-        ...state,
-        isLoading: false,
-        TableListData: payload,
-      };
-    }
 
     case GET_MODIFIER_LOADING: {
       return {
@@ -68,11 +51,69 @@ export const modifierReducer = (
       return {
         ...state,
         isLoading: false,
-        TableListData: payload,
+        ModifierData: payload,
       };
     }
 
 
+
+    case ADD_MODIFIER_LOADING: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case ADD_MODIFIER_ERROR: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+    case ADD_MODIFIER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        ModifierData: payload,
+      };
+    }
+
+ 
+
+    case UPDATE_MODIFIER_LOADING: {
+ 
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+ 
+    case UPDATE_MODIFIER_ERROR: {
+ 
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+      };
+    }
+
+ 
+    case UPDATE_MODIFIER_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        ModifierData: payload,
+ 
+      };
+    }
+
+
+ 
     case DELETE_MODIFIER_LOADING: {
       return {
         ...state,
