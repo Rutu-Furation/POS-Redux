@@ -18,6 +18,7 @@ import {
 import useFormValidator from "../../../../utils";
 import { addTable_schema } from "../../../../validations/itemsValidations";
 import { useDispatch } from "react-redux";
+import { addnewTable } from "../../../../redux/Settings/table/table.action";
 const Add_Table = () => {
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
@@ -93,7 +94,8 @@ const Add_Table = () => {
       // } finally {
       //   setLoading(false);
       // }
-      dispatch(addTable(finalObj));
+      dispatch(addnewTable(finalObj));
+      playSoundEffect();
     }
   };
 

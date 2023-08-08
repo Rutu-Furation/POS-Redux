@@ -9,7 +9,7 @@ import {
   callApi,
 } from "../../../../components/index";
 import { useDispatch, useSelector } from "react-redux";
-import { getAreaData } from "../../../../redux/Settings/Area/addArea.action";
+import { getTableList } from "../../../../redux/Settings/table/table.action";
 
 const Content = () => {
   const [Table, setTable] = useState([]);
@@ -17,13 +17,14 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const { isloading, isError, AreaData } = useSelector(
-    (state) => state.addArea
+  const { isLoading, isError, TableListData } = useSelector(
+    (state) => state.table
   );
+  console.log("TableListData", TableListData);
   const dispatch = useDispatch();
-  console.log("Area", AreaData.areas);
- 
-
+  useEffect(() => {
+    dispatch(getTableList());
+  }, []);
   const handleSearch = (e) => {
     setSearchText(e.target.value);
     setCurrentPage(1);
@@ -42,16 +43,11 @@ const Content = () => {
     // Implement the exportToCsv functionality here
     console.log("Exporting CSV...");
   };
- useEffect(() => {
-    dispatch(getAreaData());
-  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await callApi("GET", "/setting/table/list");
-
-        console.log("/setting/table", res.tables);
-        const updatedData = res.tables.map((item) => ({
+        const updatedData = TableListData.tables.map((item) => ({
           "Area/Floor": item?.area_id?.area_name || "area name",
           "Table Name": item.name || "table name",
           "Seat Capacity": item.sit_capacity || 0,
@@ -88,10 +84,6 @@ const Content = () => {
           pagename="Tables"
         />
       </div>
-      {/* </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };

@@ -11,23 +11,20 @@ import {
   SideBar,
   SideBar_Links,
 } from "../../../components/index";
-// import { GiHamburgerMenu } from "react-icons/gi";
-import POS_Nav from "../POS_Nav/POS_Nav";
+ import POS_Nav from "../POS_Nav/POS_Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { getAreaData } from "../../../redux/Settings/Area/addArea.action";
-// import POS_Nav from "../POS_Nav/POS_Nav";
-
+ 
 const Tables = () => {
   const TableListData = [];
   const { isloading, isError, AreaData } = useSelector((state) => state.Area);
 
   const disPatch = useDispatch();
-
   useEffect(() => {
     disPatch(getAreaData());
     AOS.init();
   }, []);
-  console.log("tabledata", AreaData.areas.tables);
+  console.log("tabledata", AreaData);
 
   const nav = useNavigate();
   const [selectedTable, setSelectedTable] = useState("");
@@ -115,13 +112,13 @@ const Tables = () => {
       </div>
 
       <div className="p-3">
-        {AreaData?.areas.map((item, index) => (
+        {AreaData?.areas?.map((item, index) => (
           <div className="row g-2 mb-5" key={index}>
             <div className="col-12">
               <p className="text-capitalize">{item?.area_name}</p>
             </div>
 
-            {item?.tables.map((tableId, tableIndex) => {
+            {item?.tables?.map((tableId, tableIndex) => {
               const orderStatus = tableId.order?.order_status; // Assuming order_status is available in tableId object
               const bgColor = orderStatusColors[orderStatus] || "#dee2e6";
 
