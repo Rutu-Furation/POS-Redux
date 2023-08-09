@@ -37,3 +37,4 @@ export const addnewTable = (objdata) => async (dispatch) => {
     toast.error("Table add failed");
   }
 };
+
