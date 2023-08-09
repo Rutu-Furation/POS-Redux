@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Main_Layout, callApi, TableComponent } from "../../../components/index.js";
+import {
+  Main_Layout,
+  callApi,
+  TableComponent,
+} from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredientUnits } from "../../../redux/Items/IngredientsUnit/IngredientsUnit.action.js";
 
@@ -9,9 +13,11 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {isLoading, isError, IngredientUnitsData} = useSelector((state) => state.IngredientsUnit)
+  const { isLoading, isError, IngredientUnitsData } = useSelector(
+    (state) => state.IngredientsUnit
+  );
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -32,25 +38,25 @@ const Content = () => {
     console.log("Exporting CSV...");
   };
 
+  // Fetching data from redux
   useEffect(() => {
-    const fetchData = async () => {
-      // const res = await callApi("GET", "/setting/ingredientUnit/list");
+    dispatch(getIngredientUnits());
+  }, []);
 
-      dispatch(getIngredientUnits())
-
+  useEffect(() => {
+    // Processing the data
+    if (IngredientUnitsData?.ingredientUnit) {
       const updatedData = IngredientUnitsData.ingredientUnit.map((item) => ({
         "Unit Name": item.ingredientUnit_name,
         Description: item.description,
         id: item._id || "",
       }));
       setIngredientsUnitData(updatedData);
-    };
-    fetchData();
-  }, []);
+    }
+  }, [IngredientUnitsData]);
 
   return (
     <>
-       
       <div className="w-100">
         <TableComponent
           PageName="listIngredientsUnit"

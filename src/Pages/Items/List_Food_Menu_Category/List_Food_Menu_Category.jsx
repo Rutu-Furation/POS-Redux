@@ -17,9 +17,6 @@ const Content = () => {
     (state) => state.FoodMenuCategory
   );
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getFoodMenuCategory());
-  }, []);
   const handleSearch = (e) => {
     setSearchText(e.target.value);
     setCurrentPage(1);
@@ -40,16 +37,19 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    dispatch(getFoodMenuCategory());
+  }, []);
+
+  useEffect(() => {
+    if (FoodMenuCategoryData?.foodCategory) {
       const updatedData = FoodMenuCategoryData?.foodCategory?.map((item) => ({
         "Category Name": item.name || "Nan",
         Description: item.description,
         id: item._id || "",
       }));
       setFoodMenuCategory(updatedData);
-    };
-    fetchData();
-  }, []);
+    }
+  }, [FoodMenuCategoryData]);
 
   return (
     <>

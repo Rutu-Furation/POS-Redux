@@ -34,11 +34,13 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      // const res = await callApi("GET", "/setting/modifier/list");
-      dispatch(getmodifier())
+    dispatch(getmodifier())
+  },[])
 
-      // console.log("list modifier", res.modifier);
+  useEffect(() => {
+
+    if(modifier?.modifier){
+    
       const updatedData = modifierData.modifier.map((item) => ({
         "Category Name": item.foodCategory?.name || "Nan",
         Price: item.price || "price",
@@ -50,9 +52,8 @@ const Content = () => {
         id: item._id || "",
       }));
       setModifier(updatedData);
-    };
-    fetchData();
-  }, []);
+    }
+  }, [modifierData]);
 
   return (
     <>

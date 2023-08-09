@@ -39,10 +39,13 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      // const res = await callApi("GET", "/setting/foodmenu/list");
-      dispatch(GetFoodMenu())
-      setFoodMenu(FoodMenuData?.data.foodMenu);
+
+    dispatch(GetFoodMenu())
+  },[])
+
+  useEffect(() => {
+   
+     if(FoodMenuData?.data?.foodMenu){
 
       const updatedData = FoodMenuData?.data?.foodMenu?.map((item) => ({
         "Food Menu Type": item.food_category?.name || "Nan",
@@ -56,9 +59,10 @@ const Content = () => {
         id: item._id || "",
       }));
       setFoodMenu(updatedData);
-    };
-    fetchData();
-  }, []);
+
+    }
+  }, [FoodMenuData]);
+
   const categories = useMemo(() => {
     const uniqueCategories = [
       ...new Set(foodMenu.map((item) => item["Category"])),
