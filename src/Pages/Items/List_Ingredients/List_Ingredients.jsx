@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Main_Layout, callApi, TableComponent } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
+import { deleteIngredientsData, getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
 const Content = () => {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -81,6 +81,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Ingredients"
           isLoading={isLoading}
+           DeleteRedux={deleteIngredientsData}
 
         />
       </div>

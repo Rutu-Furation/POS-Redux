@@ -7,7 +7,7 @@ import {
   Toaster,
 } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { GetFoodMenu } from "../../../redux/Items/FoodMenu/FoodMenu.actions.js";
+import { GetFoodMenu, deleteFoodMenuData } from "../../../redux/Items/FoodMenu/FoodMenu.actions.js";
 const Content = () => {
   const [foodMenu, setFoodMenu] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -62,6 +62,7 @@ const Content = () => {
 
     }
   }, [FoodMenuData]);
+  
 
   const categories = useMemo(() => {
     const uniqueCategories = [
@@ -92,7 +93,7 @@ const Content = () => {
           categories={categories}
           pagename="Food Menu"
           isLoading={isLoading}
-
+          DeleteRedux={deleteFoodMenuData}
         />
       </div>
     </>

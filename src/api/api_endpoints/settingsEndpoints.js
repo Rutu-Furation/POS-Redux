@@ -11,7 +11,7 @@ const tableEndpoints = {
   getTableById: (id) => `/setting/table/${id}`,
   addTable: `/setting/table/new`,
   updateTable: (id) => `/setting/table/update/${id}`,
-  deleteTable: (id) => `/setting/area/delete/${id}`,
+  deleteTable: (id) => `/setting/table/delete/${id}`,
 };
 
 const deliveryPartnerEndpoints = {
