@@ -87,6 +87,8 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           categories={categories}
           pagename="Food Menu"
+          isLoading={isLoading}
+
         />
       </div>
     </>

@@ -14,9 +14,11 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {isLoading, isError, PreMadeFoodData} = useSelector((state) => state.premadefood)
+  const { isLoading, isError, PreMadeFoodData } = useSelector(
+    (state) => state.premadefood
+  );
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -36,26 +38,20 @@ const Content = () => {
     // Implement the exportToCsv functionality here
     console.log("Exporting CSV...");
   };
-
   useEffect(() => {
-    const fetchData = async () => {
-      // const res = await callApi("GET", "/setting/preFoodMade/list");
-      // console.log("Res", res);
-
-      dispatch(getPreMadeFood())
-
-      const updatedData = PreMadeFoodData?.preFoodMade.map((item) => ({
-        Code: item.code || "Nan",
-        Name: item.nameFood || "Nan",
-        "Purchase Price": item.purchasePrice || "Nan",
-        "Low Quantity/Amount": item.lowQAmt || "Nan",
-        Unit: item.unit || "Nan",
-        "Added By": "Admin User",
-        id: item._id | "",
-      }));
-      setPreMadeFood(updatedData);
-    };
-    fetchData();
+    dispatch(getPreMadeFood());
+  }, []);
+  useEffect(() => {
+    const updatedData = PreMadeFoodData?.preFoodMade.map((item) => ({
+      Code: item.code || "Nan",
+      Name: item.nameFood || "Nan",
+      "Purchase Price": item.purchasePrice || "Nan",
+      "Low Quantity/Amount": item.lowQAmt || "Nan",
+      Unit: item.unit || "Nan",
+      "Added By": "Admin User",
+      id: item._id || "", // Fix the bitwise OR (|) to logical OR (||)
+    }));
+    setPreMadeFood(updatedData);
   }, []);
 
   return (
@@ -72,11 +68,14 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-          totalPages={Math.ceil(PreMadeFoodData?.preFoodMade?.length / rowsPerPage)}
+          totalPages={Math.ceil(
+            PreMadeFoodData?.preFoodMade?.length / rowsPerPage
+          )}
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
           pagename="Pre Made Food"
+          isLoading={isLoading}
         />
       </div>
       {/* </div>

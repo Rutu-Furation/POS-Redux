@@ -85,6 +85,7 @@ const List_Payment_Methods = () => {
                   endPage={3}
                   pageNumbers={[1, 2, 3]}
                   pagename="Payment"
+                  isLoading={isLoading||true}
                 />
               </div>
             </div>
