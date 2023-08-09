@@ -13,6 +13,7 @@ import useFormValidator from "../../../utils/formValidator.js";
 import { addIngredient_schema } from "../../../validations/itemsValidations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addnewIngredient } from "../../../redux/Items/Ingredients/Ingredients.action.js";
+import playSoundEffect from "../../../utils/SoundEffect.js";
 
 const Content = () => {
   const { units, fetchUnits } = useContext(FoodContext);
@@ -81,20 +82,9 @@ const Content = () => {
   const handleAddIngredient = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      // try {
-      //   // Set loading to true to show the spinner
-      //   setLoading(true);
-      //   const res = await callApi("POST", addIngredient, newIngredient);
-      //   console.log("res", res);
-      //   toast.success("Ingredient added successfully");
-      // } catch (error) {
-      //   console.error(error);
-      //   toast.error(error.message);
-      // } finally {
-      //   // Set loading to false to hide the spinner
-      //   setLoading(false);
-      // }
+       
       dispatch(addnewIngredient(newIngredient));
+      playSoundEffect();
     }
   };
   console.log("loading", loading);

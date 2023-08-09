@@ -12,7 +12,11 @@ import { FoodContext } from "../../../context/FoodContext.jsx";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addModifier_schema } from "../../../validations/itemsValidations.js";
 import { addmodifier } from "../../../redux/Items/Modifier/Modifier.action.js";
+
 import { useDispatch, useSelector } from "react-redux";
+
+import playSoundEffect from "../../../utils/SoundEffect.js";
+
 
 const Content = () => {
   const [rows, setRows] = useState([]);
@@ -118,19 +122,8 @@ const Content = () => {
   const handelAddModifier = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      // try {
-      //   setLoading(true);
-      //   let res = await callApi("POST", "/setting/modifier/new", finalObj);
-      //   console.log("Res", res);
-      //   toast.success("Modifier Added successfully");
-      // } catch (err) {
-      //   console.log("err", err);
-      //   toast.error("Failed to Add Modifer");
-      // } finally {
-      //   setLoading(false);
-      // }
-      console.log("finalObj", finalObj);
       dispatch(addmodifier(finalObj));
+      playSoundEffect();
     }
   };
   return (

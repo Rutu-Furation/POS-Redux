@@ -19,6 +19,7 @@ import useFormValidator from "../../../../utils";
 import { addTable_schema } from "../../../../validations/itemsValidations";
 import { useDispatch, useSelector } from "react-redux";
 import { addnewTable } from "../../../../redux/Settings/table/table.action";
+import playSoundEffect from "../../../../utils/SoundEffect";
 const Add_Table = () => {
 
   const {isLoading} = useSelector((state) => state.table)
@@ -72,31 +73,11 @@ const Add_Table = () => {
   };
 
   console.log(finalObj);
-  const playSoundEffect = () => {
-    const scriptURL = new URL(import.meta.url);
-    const soundURL = new URL(
-      "../../../../assets/interface-124464.mp3",
-      scriptURL
-    ).toString();
-    const audio = new Audio(soundURL);
-    audio.play();
-  };
+
   const dispatch = useDispatch();
   const addTable = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-      // try {
-      //   setLoading(true);
-      //   const res = await callApi("POST", "/setting/table/new", finalObj);
-      //   console.log(res);
-      //   toast.success("Table added successfully");
-      //   playSoundEffect();
-      // } catch (error) {
-      //   console.error(error);
-      //   toast.error("Failed to add table");
-      // } finally {
-      //   setLoading(false);
-      // }
       dispatch(addnewTable(finalObj));
       playSoundEffect();
     }

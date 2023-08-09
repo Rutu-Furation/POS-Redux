@@ -11,6 +11,7 @@ import useFormValidator from "../../../utils/formValidator.js";
 import { addFoodMenuCategory_schema } from "../../../validations/itemsValidations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
+import playSoundEffect from "../../../utils/SoundEffect.js";
 
 const Content = () => {
   const [categoryData, setCategoryData] = useState({
@@ -36,22 +37,9 @@ const Content = () => {
     const validationErrors = validateForm();
 
     if (!validationErrors) {
-      // try {
-      //   setLoading(true);
-      //   const res = await callApi(
-      //     "POST",
-      //     "/setting/foodCategory/new",
-      //     categoryData
-      //   );
-      //   console.log(res);
-      //   toast.success("Food Category added successfully");
-      // } catch (error) {
-      //   console.error(error);
-      //   toast.error("Failed to add Food Category");
-      // } finally {
-      //   setLoading(false);
-      // }
+      
       dispatch(addFoodMenuCategory(categoryData));
+      playSoundEffect();
     }
   };
 

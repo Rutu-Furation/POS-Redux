@@ -30,6 +30,8 @@ import {
 } from "../../../components/index";
 import ZeroOrder from "./ZeroOrder";
 import { GiHamburgerMenu } from "react-icons/gi";
+import playSoundEffect2 from "../../../utils/SoundEffect2";
+import playSoundEffect from "../../../utils/SoundEffect";
 const POS = () => {
   const [veg, setVeg] = useState("All");
   const [orderType, setOrderType] = useState("Dine_In");
@@ -98,23 +100,11 @@ const POS = () => {
   useEffect(() => {
     filterData();
   }, [filterData]);
-  const playSoundEffect = () => {
-    const scriptURL = new URL(import.meta.url);
-    const soundURL = new URL(sounds.stopSound, scriptURL).toString();
-    const audio = new Audio(soundURL);
-    audio.play();
-  };
-
-  const playSoundEffect2 = () => {
-    const scriptURL = new URL(import.meta.url);
-    const soundURL = new URL(sounds.interfaceSound, scriptURL).toString();
-    const audio = new Audio(soundURL);
-    audio.play();
-  };
+ 
 
   const handleAddFoodMenu = (item) => {
     handleOrderDetails(item);
-    playSoundEffect();
+    playSoundEffect2();
   };
 
   const handleFilterInput = (e) => {
@@ -546,7 +536,7 @@ const POS = () => {
                     type="button"
                     onClick={() => {
                       handleBillPrint();
-                      playSoundEffect2();
+                      playSoundEffect();
                     }}
                     btnTxt="Save & Print"
                   />
