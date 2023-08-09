@@ -33,13 +33,11 @@ const SettingsInput = ({
         placeholder={placeholder}
         onChange={onChange}
         name={name}
-        // required={required}
+       
         pattern={pattern}
         onBlur={handleFocus}
         focused={focused.toString()}
-        // onFocus={() => {
-        //   name === name && setFocused(true);
-        // }}
+     
       />
       {errorMsg && <span className="errorMsg">{errorMsg}</span>}
     </>

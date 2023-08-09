@@ -61,12 +61,10 @@ const Pagination = ({
             )
           }
           className={currentPage === 1 ? "disableImg" : "activeImg"}
-          // disabled={currentPage === 1}
           src={images?.preVector}
           alt=""
         />
-        {/* <img src={images?.pre} alt="" />
-        </button> */}
+
         {pageNumbers.map((number, index) =>
           typeof number === "number" ? (
             <button
@@ -92,8 +90,6 @@ const Pagination = ({
           src={images?.paginatoinVector}
           alt=""
         />
-        {/* <img src={images?.next} alt="" />  */}
-        {/* </button> */}
       </div>
     </div>
   );

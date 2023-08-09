@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import {
-  callApi,
-  TableComponent,
-  Main_Layout,
-} from "../../../components/index.js";
+import { TableComponent, Main_Layout } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteFoodMenuCategoryData, getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
+import {
+  deleteFoodMenuCategoryData,
+  getFoodMenuCategory,
+} from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
 
 const Content = () => {
   const [FoodMenuCategory, setFoodMenuCategory] = useState([]);
@@ -33,7 +32,6 @@ const Content = () => {
 
   const exportToCsv = () => {
     // Implement the exportToCsv functionality here
-    console.log("Exporting CSV...");
   };
 
   useEffect(() => {

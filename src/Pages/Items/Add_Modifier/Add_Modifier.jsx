@@ -17,13 +17,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import playSoundEffect from "../../../utils/SoundEffect.js";
 
-
 const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputValues, setInputValues] = useState("");
 
-  const {isLoading} = useSelector((state) => state.modifier)
+  const { isLoading } = useSelector((state) => state.modifier);
 
   const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);

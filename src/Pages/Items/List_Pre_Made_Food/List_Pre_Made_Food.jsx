@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import {
-  callApi,
-  Main_Layout,
-  TableComponent,
-} from "../../../components/index.js";
+import { Main_Layout, TableComponent } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { deletepremadefood, getPreMadeFood } from "../../../redux/Items/PreMadeFood/PreMadeFood.actions.js";
+import {
+  deletepremadefood,
+  getPreMadeFood,
+} from "../../../redux/Items/PreMadeFood/PreMadeFood.actions.js";
 
 const Content = () => {
   const [preMadeFood, setPreMadeFood] = useState([]);
@@ -36,15 +35,12 @@ const Content = () => {
 
   const exportToCsv = () => {
     // Implement the exportToCsv functionality here
-    console.log("Exporting CSV...");
   };
 
-  // Fetching data using redux dispatch
   useEffect(() => {
     dispatch(getPreMadeFood());
   }, []);
 
-  // Process the data once it's available
   useEffect(() => {
     if (PreMadeFoodData?.preFoodMade) {
       const updatedData = PreMadeFoodData.preFoodMade.map((item) => ({
@@ -84,9 +80,6 @@ const Content = () => {
           DeleteRedux={deletepremadefood}
         />
       </div>
-      {/* </div>
-        </div>
-      </div> */}
     </>
   );
 };

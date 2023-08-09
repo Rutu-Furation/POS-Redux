@@ -17,7 +17,6 @@ const SettingsSelect = ({
 }) => {
   return (
     <>
-      {/* {label && ( */}
       <label htmlFor={labelFor} className="form-label settings_select_label">
         {labelText} {required && "*"} {tooltip && <span>?</span>}
       </label>
@@ -37,8 +36,6 @@ const SettingsSelect = ({
           }),
         }}
         onChange={onChange}
-        // required={required}
-        // label={label}
         placeholder={placeholder}
       />
       {error && <span className="errorSpan">{error}</span>}

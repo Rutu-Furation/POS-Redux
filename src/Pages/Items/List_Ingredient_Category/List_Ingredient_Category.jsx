@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Main_Layout, TableComponent, callApi } from "../../../components/index.js";
+import { Main_Layout, TableComponent } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteIngredientsCategoryData, getIngredientCategories } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
+import {
+  deleteIngredientsCategoryData,
+  getIngredientCategories,
+} from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
 
 const Content = () => {
   const [ingredientsCategoryData, setIngredientsCategoryData] = useState([]);
@@ -9,10 +12,12 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {isLoading, isError, IngredientCategoryData} = useSelector((state) => state.Ingredientcategory)
-  console.log(IngredientCategoryData)
+  const { isLoading, isError, IngredientCategoryData } = useSelector(
+    (state) => state.Ingredientcategory
+  );
+  console.log(IngredientCategoryData);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -34,17 +39,19 @@ const Content = () => {
   };
 
   useEffect(() => {
-    dispatch(getIngredientCategories())
-  },[])
+    dispatch(getIngredientCategories());
+  }, []);
 
   useEffect(() => {
-    if(IngredientCategoryData?.ingredientCategory){
-      const updatedData = IngredientCategoryData.ingredientCategory.map((item) => ({
-        Category: item.ingredientCategory_name,
-        Description: item.description,
-        "Added By": "Admin User",
-        id: item._id || "",
-      }));
+    if (IngredientCategoryData?.ingredientCategory) {
+      const updatedData = IngredientCategoryData.ingredientCategory.map(
+        (item) => ({
+          Category: item.ingredientCategory_name,
+          Description: item.description,
+          "Added By": "Admin User",
+          id: item._id || "",
+        })
+      );
       setIngredientsCategoryData(updatedData);
     }
   }, [IngredientCategoryData]);
@@ -69,7 +76,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Ingredient Category"
           isLoading={isLoading}
-DeleteRedux={deleteIngredientsCategoryData}
+          DeleteRedux={deleteIngredientsCategoryData}
         />
       </div>
     </>

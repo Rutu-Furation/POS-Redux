@@ -40,11 +40,9 @@ const SideBar = () => {
                 return (
                   <div
                     key={index}
-                    // className="text-center  listItemDiv"
                     className={`text-center  listItemDiv ${
                       elem.set === links ? "isActiveItem" : ""
                     }`}
-                    // onClick={() => changeLink(elem.set)}
                   >
                     <img src={elem.logo} alt="" />
                     <p className="listItem text-center">
@@ -72,112 +70,6 @@ const SideBar = () => {
                 );
               }
             })}
-
-            {/* <div>
-              <p
-                className=" text-center listItem"
-                // onClick={() => setOpen(!open)}
-                // onClick={() => setOpen("settingsLinks")}
-                onClick={() => changeLink("settingsLinks")}
-              >
-                <NavLink className="text-decoration-none text-white">
-                  Settings
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className=" text-center"
-                onClick={() => changeLink("itemsLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Items
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className=" text-center"
-                onClick={() => changeLink("outletLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Outlets
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className=" text-center"
-                onClick={() => changeLink("panelLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Panel
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className=" text-center"
-                // onClick={() => changeLink("dashboardLinks")}
-              >
-                <NavLink
-                  to={`/dashboard`}
-                  className="text-decoration-none text-white listItem"
-                >
-                  Dashboard
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className=" text-center"
-                onClick={() => changeLink("purchaseLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Purchase
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className={` text-center`}
-                onClick={() => changeLink("productionLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Production
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className={` text-center`}
-                onClick={() => changeLink("transferLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Transfer
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className={` text-center`}
-                onClick={() => changeLink("saleLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Sale
-                </NavLink>
-              </p>
-            </div>
-            <div>
-              <p
-                className={` text-center`}
-                onClick={() => changeLink("stockLinks")}
-              >
-                <NavLink className="text-decoration-none text-white listItem">
-                  Stock
-                </NavLink>
-              </p>
-            </div> */}
           </div>
         </div>
       </div>

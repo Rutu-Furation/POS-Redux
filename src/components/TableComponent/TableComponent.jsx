@@ -13,12 +13,12 @@ import { useReactToPrint } from "react-to-print";
 import { BsFileEarmarkExcel } from "react-icons/bs";
 
 import { images } from "../../assets";
-import { Loading, callApi, toast, Toaster, Pagination } from "../index";
+import { Loading, toast, Toaster, Pagination } from "../index";
 import TableHeader from "./Table_Headers";
 import TableDataPrint from "./TableDataPrint/TableDataPrint";
 import PdfExportButton from "./PDFGenerator/PDFGenerator ";
-import { deleteAreaData } from "../../redux/Settings/Area/addArea.action";
 import { useDispatch } from "react-redux";
+import playSoundEffect from "../../utils/SoundEffect";
 
 const TableComponent = ({
   data,
@@ -31,13 +31,12 @@ const TableComponent = ({
   exportToCsv,
   totalPages,
   extraButton,
-  deleteRoute,
+
   categories,
   pagename,
   isLoading,
   DeleteRedux,
 }) => {
-  // const [isLoading, setIsLoading] = useState(false);
   const [tableHeaders, setTableHeaders] = useState([]);
   const [initialData, setInitialData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -48,14 +47,12 @@ const TableComponent = ({
   const TableRef = useRef();
   useEffect(() => {
     if (data.length !== 0) {
-      // setIsLoading(false);
       const keys = Object.keys(data[0]).filter(
         (key) => key !== "SN" && key !== "id"
       );
       setTableHeaders(["SN", ...keys]);
-      setInitialData(data); // Set the initialData state when data prop changes
+      setInitialData(data);
     } else {
-      // setIsLoading(true);
     }
   }, [data]);
 
@@ -96,16 +93,6 @@ const TableComponent = ({
     playSoundEffect();
     const updatedData = initialData.filter((item) => item.id !== dataId);
     setInitialData(updatedData);
-  };
-
-  const playSoundEffect = () => {
-    const scriptURL = new URL(import.meta.url);
-    const soundURL = new URL(
-      "../../assets/stop-13692.mp3",
-      scriptURL
-    ).toString();
-    const audio = new Audio(soundURL);
-    audio.play();
   };
 
   exportToCsv = () => {
@@ -196,7 +183,6 @@ const TableComponent = ({
                   </div>
                 </div>
                 <div className=" buttonGroup d-flex    ">
-                  {/* Export button */}
                   {extraButton && (
                     <div className="filter-by-category">
                       <label>Filter by category</label>
@@ -214,12 +200,9 @@ const TableComponent = ({
                     </div>
                   )}
 
-                  <div
-                    //  onClick={exportToCsv}
-                    className="export-btnDiv"
-                  >
+                  <div className="export-btnDiv">
                     <img src={images.share} alt="" />
-                    {/* <button className="export-btn">Export</button> */}
+
                     <div className="dropdown">
                       <button
                         className="dropDownButton"
@@ -279,19 +262,6 @@ const TableComponent = ({
                         </li>
 
                         <li>
-                          {/* <button
-                            className="dropdown-item"
-                            type="button"
-                            
-                          >
-                              <span className="m-1">
-                              <RiDeleteBin6Line />
-                               
-                            </span>{" "}
-                            PDF  
-
-                          
-                          </button> */}
                           <PdfExportButton
                             tableHeaders={tableHeaders}
                             paginatedData={paginatedData}
@@ -307,15 +277,6 @@ const TableComponent = ({
 
               <div className="tableWrapper">
                 <table className="tableComponents">
-                  {/* Table headers */}
-                  {/* <thead>
-                    <tr>
-                      {tableHeaders.map((header) => (
-                        <th key={header}>{header}</th>
-                      ))}
-                      <th>Actions</th>
-                    </tr>
-                  </thead> */}
                   <TableHeader headers={tableHeaders} />
                   {/* Table body */}
                   <tbody>
