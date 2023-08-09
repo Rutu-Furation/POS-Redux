@@ -16,18 +16,23 @@ import { addmodifier } from "../../../redux/Items/Modifier/Modifier.action.js";
 import { useDispatch, useSelector } from "react-redux";
 
 import playSoundEffect from "../../../utils/SoundEffect.js";
+import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
 const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputValues, setInputValues] = useState("");
+  const [ingredientOptions, setIngredientOptions] = useState([])
 
-  const { isLoading } = useSelector((state) => state.modifier);
+  const {isLoading} = useSelector((state) => state.modifier)
+  const {IngredientsData} = useSelector((state) => state.Ingredient)
 
-  const { ingredients, fetchIngredients } = useContext(FoodContext);
+
+  // const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);
   useEffect(() => {
-    fetchIngredients();
+    // fetchIngredients();
+    dispatch(getIngredients())
   }, []);
 
   const newModifier = {
@@ -38,12 +43,16 @@ const Content = () => {
     newModifier,
     addModifier_schema
   );
-  const ingredientOptions = ingredients?.ingredient?.map((item) => ({
-    value: item._id,
-    label: item.name,
-    costUnit: item.costUnit,
-    code: item.code,
-  }));
+
+  useEffect(() => {
+    const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
+      value: item._id,
+      label: item.name,
+      costUnit: item.costUnit,
+      code: item.code,
+    }));
+    setIngredientOptions(ingredientOptions)
+  },[IngredientsData])
 
   //FUNCTION FOR HANDLING INPUT DATA
   const handleInputData = (e) => {

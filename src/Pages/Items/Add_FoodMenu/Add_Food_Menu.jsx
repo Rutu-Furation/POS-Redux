@@ -17,10 +17,20 @@ import {
 } from "../../../components/index.js";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addFoodMenu_schema } from "../../../validations/itemsValidations.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action";
+import { GetFoodMenu } from "../../../redux/Items/FoodMenu/FoodMenu.actions";
+import { getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions";
+
+
 const Add_Food_Menu = () => {
 
   const {isLoading} = useSelector((state) => state.foodMenu)
+  const {IngredientsData} = useSelector((state) => state.Ingredient)//IngredientsData
+  const {FoodMenuData} =useSelector((state) => state.foodMenu)
+  const {FoodMenuCategoryData} = useSelector((state) => state.FoodMenuCategory)
+
+  const dispatch = useDispatch()
 
   const [menuType, setMenuType] = useState("regular");
   const handleMenuType = (option) => {
@@ -41,6 +51,10 @@ const Add_Food_Menu = () => {
   const [inputsData, setInputsData] = useState("");
   const [selectInputs, setSelectInputs] = useState("");
   const [vegBeverage, setVegBeverage] = useState("");
+
+  const [foodCategoryOptions, setFoodCategoryOptions] = useState([])
+  const [foodMenuOptions, setFoodMenuOptions] = useState([])
+  const [ingredientOptions, setIngredientOptions] = useState([])
 
   // STATE FOR REGULAR TABLE
   const [rows, setRows] = useState([]);
@@ -70,35 +84,55 @@ const Add_Food_Menu = () => {
     newFoodMenu,
     addFoodMenu_schema
   );
-  // FETCHING DELIVERY PARTNERS
+
+  // FETCHING REQUIRED DATA
   useEffect(() => {
     callApi("GET", "/setting/deliveryPartner/list")
       .then((res) => setDeliveryPartners(res.deliveryPartners))
       .catch((err) => console.log(err));
 
-    fetchIngredients();
-    fetchFoodMenu();
-    fetchFoodCategories();
+    // fetchIngredients();
+    // fetchFoodMenu();
+    // fetchFoodCategories();
+    dispatch(getIngredients())
+    dispatch(GetFoodMenu())
+    dispatch(getFoodMenuCategory())
+    
   }, []);
 
   // INGREDIENT OPTIONS
-  const ingredientOptions = ingredients?.ingredient?.map((item) => ({
-    value: item._id,
-    label: item.name,
-    costUnit: item.costUnit,
-  }));
+  useEffect(() => {
+    if(IngredientsData?.ingredient){
+    const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
+      value: item._id,
+      label: item.name,
+      costUnit: item.costUnit,
+    }));
+    setIngredientOptions(ingredientOptions)
+  }
+  },[IngredientsData])
 
   //STATE FOR FOOD MENU OPTIONS
-  const foodMenuOptions = foodMenu?.foodMenu?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  useEffect(() => {
+    if(FoodMenuData?.foodMenu){
+    const foodMenuOptions = FoodMenuData?.foodMenu?.map((item) => ({
+      value: item._id,
+      label: item.name,
+    }));
+    setFoodMenuOptions(foodMenuOptions)
+  }
+  },[FoodMenuData])
 
   //GETTING FOOD CATEGORIES OPTIONS
-  const foodCategoryOptions = foodCategories?.foodCategory?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  useEffect(() => {
+    if(FoodMenuCategoryData?.foodCategory){
+    const foodCategoryOptions = FoodMenuCategoryData?.foodCategory?.map((item) => ({
+      value: item._id,
+      label: item.name,
+    }));
+    setFoodCategoryOptions(foodCategoryOptions)
+  }
+  },[FoodMenuCategoryData])
 
   const handleDeliveryPrices = (e) => {
     setDeliveyPrices([
@@ -473,7 +507,7 @@ const Add_Food_Menu = () => {
                     <SettingsSelect
                       selectId="category"
                       labelFor="category"
-                      labelText="Category"
+                      labelText="Category"  
                       options={foodCategoryOptions}
                       required
                       onChange={(value) =>
