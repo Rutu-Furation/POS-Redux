@@ -14,11 +14,14 @@ import {
 } from "../../../../components/index";
 import useFormValidator from "../../../../utils";
 import { addArea_schema } from "../../../../validations/itemsValidations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addAreaData } from "../../../../redux/Settings/Area/addArea.action";
 import playSoundEffect from "../../../../utils/SoundEffect";
 
 const Content = () => {
+
+  const {isLoading} = useSelector((state) => state.Area)
+
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
   const [allOutlets, setAllOutlets] = useState([]);
@@ -160,9 +163,9 @@ const Content = () => {
 
         <div className="row">
           <div className="col-sm-12 col-md-2 col-md-2">
-            <Settings_Button type="submit" btnTxt="Submit" loading={loading}>
+            <Settings_Button type="submit" btnTxt="Submit" loading={isLoading}>
               {/* Show the spinner when loading is true */}
-              {loading ? (
+              {isLoading ? (
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"

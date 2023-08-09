@@ -9,7 +9,7 @@ import {
 } from "../../../components/index.js";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addFoodMenuCategory_schema } from "../../../validations/itemsValidations.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
 import playSoundEffect from "../../../utils/SoundEffect.js";
 
@@ -19,6 +19,9 @@ const Content = () => {
     description: "",
   });
   const [loading, setLoading] = useState(false);
+
+  const {isLoading} = useSelector((state) => state.FoodMenuCategory)
+
   const handleInputs = (e) => {
     setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
   };
@@ -107,9 +110,9 @@ const Content = () => {
 
         <div className="row">
           <div className="col-sm-12 col-md-2 col-lg-2">
-            <Settings_Button type="submit" btnTxt="Submit" loading={loading}>
+            <Settings_Button type="submit" btnTxt="Submit" loading={isLoading}>
               {/* Show the spinner when loading is true */}
-              {loading ? (
+              {isLoading ? (
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"

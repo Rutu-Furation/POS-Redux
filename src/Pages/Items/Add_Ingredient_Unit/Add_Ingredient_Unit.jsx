@@ -10,13 +10,16 @@ import {
 import * as yup from "yup";
 import useFormValidator from "../../../utils";
 import { addIngredientUnit_Schema } from "../../../validations/itemsValidations.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addIngredientUnit } from "../../../redux/Items/IngredientsUnit/IngredientsUnit.action.js";
 import playSoundEffect from "../../../utils/SoundEffect.js";
 
 const Content = () => {
   const [credentials, setCredentials] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const {isLoading} = useSelector((state) => state.IngredientsUnit)
+
   const handleInputs = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -97,9 +100,9 @@ const dispatch=useDispatch()
 
         <div className="row">
           <div className="col-sm-12 col-md-2 col-lg-2">
-            <Settings_Button type="submit" btnTxt="Submit" loading={loading}>
+            <Settings_Button type="submit" btnTxt="Submit" loading={isLoading}>
               {/* Show the spinner when loading is true */}
-              {loading ? (
+              {isLoading ? (
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"
