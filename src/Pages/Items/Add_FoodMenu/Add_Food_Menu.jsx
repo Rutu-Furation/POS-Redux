@@ -17,7 +17,11 @@ import {
 } from "../../../components/index.js";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addFoodMenu_schema } from "../../../validations/itemsValidations.js";
+import { useSelector } from "react-redux";
 const Add_Food_Menu = () => {
+
+  const {isLoading} = useSelector((state) => state.foodMenu)
+
   const [menuType, setMenuType] = useState("regular");
   const handleMenuType = (option) => {
     setMenuType(option.value);

@@ -12,12 +12,14 @@ import { FoodContext } from "../../../context/FoodContext.jsx";
 import useFormValidator from "../../../utils/formValidator.js";
 import { addModifier_schema } from "../../../validations/itemsValidations.js";
 import { addmodifier } from "../../../redux/Items/Modifier/Modifier.action.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputValues, setInputValues] = useState("");
+
+  const {isLoading} = useSelector((state) => state.modifier)
 
   const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);
@@ -336,9 +338,9 @@ const Content = () => {
         {/* BUTTON ROW */}
         <div className="row">
           <div className="col-sm-12 col-md-2 col-lg-2">
-            <Settings_Button type="submit" btnTxt="Submit" loading={loading}>
+            <Settings_Button type="submit" btnTxt="Submit" loading={isLoading}>
               {/* Show the spinner when loading is true */}
-              {loading ? (
+              {isLoading ? (
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"

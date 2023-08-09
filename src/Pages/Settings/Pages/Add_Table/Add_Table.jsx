@@ -17,9 +17,12 @@ import {
 
 import useFormValidator from "../../../../utils";
 import { addTable_schema } from "../../../../validations/itemsValidations";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addnewTable } from "../../../../redux/Settings/table/table.action";
 const Add_Table = () => {
+
+  const {isLoading} = useSelector((state) => state.table)
+
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
   const [areas, setAreas] = useState("");
@@ -312,9 +315,9 @@ const Add_Table = () => {
                       <Settings_Button
                         type="submit"
                         btnTxt="Submit"
-                        loading={loading}
+                        loading={isLoading}
                       >
-                        {loading ? (
+                        {isLoading ? (
                           <span
                             className="spinner-border spinner-border-sm"
                             role="status"

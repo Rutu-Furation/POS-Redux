@@ -12,6 +12,9 @@ import {
 import { FoodContext } from "../../../context/FoodContext.jsx";
 
 const Content = () => {
+
+  const {isLoading} = useSelector((state) => state.premadefood)
+
   const {
     foodCategories,
     ingredients,
