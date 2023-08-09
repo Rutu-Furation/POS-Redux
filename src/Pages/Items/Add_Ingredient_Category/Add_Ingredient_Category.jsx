@@ -11,6 +11,7 @@ import useFormValidator from "../../../utils/formValidator.js";
 import { addIngredientCategory_schema } from "../../../validations/itemsValidations.js";
 import { useDispatch } from "react-redux";
 import { addIngredientcategory } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
+import playSoundEffect from "../../../utils/SoundEffect.js";
 
 const Content = () => {
   const [credentials, setCredentials] = useState("");
@@ -24,46 +25,20 @@ const Content = () => {
     company_id: "64a940e343320e825b8f4ff7", //ABC COMPANY ID
   };
 
- 
   const { errors, validateForm } = useFormValidator(
     finalObj,
     addIngredientCategory_schema
   );
-  const playSoundEffect = () => {
-    const scriptURL = new URL(import.meta.url);
-    const soundURL = new URL(
-      "../../../assets/stop-13692.mp3",
-      scriptURL
-    ).toString();
-    const audio = new Audio(soundURL);
-    audio.play();
-  };
-const dispatch=useDispatch()
+   
+  const dispatch = useDispatch();
   const addIngredientCategory = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-    //   try {
-    //     setLoading(true);
-    //     const res = await callApi(
-    //       "POST",
-    //       "/setting/ingredientCategory/new",
-    //       finalObj
-    //     );
-    //     if (res) {
-    //       toast.success("Ingredient Category added successfully");
-    //     }
-    //   } catch (error) {
-    //     toast.error("Failed to add Ingredient Category");
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // } else {
-    //   console.log("Invalid form data");
-    // }
-    dispatch(addIngredientcategory(finalObj))
-    playSoundEffect()
+     
+      dispatch(addIngredientcategory(finalObj));
+      playSoundEffect();
+    }
   };
-  }
   const formStructure = [
     {
       inputId: "categoryName",
