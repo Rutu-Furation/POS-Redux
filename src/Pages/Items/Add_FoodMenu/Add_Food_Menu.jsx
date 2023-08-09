@@ -102,30 +102,36 @@ const Add_Food_Menu = () => {
 
   // INGREDIENT OPTIONS
   useEffect(() => {
+    if(IngredientsData?.ingredient){
     const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
       value: item._id,
       label: item.name,
       costUnit: item.costUnit,
     }));
     setIngredientOptions(ingredientOptions)
+  }
   },[IngredientsData])
 
   //STATE FOR FOOD MENU OPTIONS
   useEffect(() => {
+    if(FoodMenuData?.foodMenu){
     const foodMenuOptions = FoodMenuData?.foodMenu?.map((item) => ({
       value: item._id,
       label: item.name,
     }));
     setFoodMenuOptions(foodMenuOptions)
+  }
   },[FoodMenuData])
 
   //GETTING FOOD CATEGORIES OPTIONS
   useEffect(() => {
+    if(FoodMenuCategoryData?.foodCategory){
     const foodCategoryOptions = FoodMenuCategoryData?.foodCategory?.map((item) => ({
       value: item._id,
       label: item.name,
     }));
     setFoodCategoryOptions(foodCategoryOptions)
+  }
   },[FoodMenuCategoryData])
 
   const handleDeliveryPrices = (e) => {
