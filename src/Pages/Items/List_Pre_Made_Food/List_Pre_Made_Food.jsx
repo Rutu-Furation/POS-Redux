@@ -14,9 +14,11 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {isLoading, isError, PreMadeFoodData} = useSelector((state) => state.premadefood)
+  const { isLoading, isError, PreMadeFoodData } = useSelector(
+    (state) => state.premadefood
+  );
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -59,6 +61,7 @@ const Content = () => {
       }
     }, [PreMadeFoodData]);
 
+
   return (
     <>
       <div className="p-3 w-100">
@@ -73,11 +76,14 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
+
           totalPages={Math.ceil(preMadeFood?.length / rowsPerPage)}
+
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
           pagename="Pre Made Food"
+          isLoading={isLoading}
         />
       </div>
       {/* </div>

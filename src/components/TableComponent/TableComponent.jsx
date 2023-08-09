@@ -34,8 +34,9 @@ const TableComponent = ({
   deleteRoute,
   categories,
   pagename,
+  isLoading
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [tableHeaders, setTableHeaders] = useState([]);
   const [initialData, setInitialData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -46,14 +47,14 @@ const TableComponent = ({
   const TableRef = useRef();
   useEffect(() => {
     if (data.length !== 0) {
-      setIsLoading(false);
+      // setIsLoading(false);
       const keys = Object.keys(data[0]).filter(
         (key) => key !== "SN" && key !== "id"
       );
       setTableHeaders(["SN", ...keys]);
       setInitialData(data); // Set the initialData state when data prop changes
     } else {
-      setIsLoading(true);
+      // setIsLoading(true);
     }
   }, [data]);
 
@@ -87,7 +88,7 @@ const TableComponent = ({
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
- 
+
   const handleDelete = async (dataId) => {
     try {
       let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);

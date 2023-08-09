@@ -65,13 +65,12 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-          totalPages={Math.ceil(
-            FoodMenuCategoryData?.foodCategory?.length / rowsPerPage
-          )}
+          totalPages={Math.ceil(FoodMenuCategory?.length / rowsPerPage)}
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
           pagename="Food Menu Category"
+          isLoading={isLoading}
         />
       </div>
     </>
