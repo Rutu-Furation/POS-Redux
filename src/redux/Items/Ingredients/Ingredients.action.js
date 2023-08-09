@@ -55,7 +55,7 @@ export const addnewIngredient = (newData) => async (dispatch) => {
   }
 };
 
-export const deleteAreaData = (id) => async (dispatch) => {
+export const deleteIngredientsData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_INGREDIENT_LOADING });
   try {
     let res = await axios.delete(

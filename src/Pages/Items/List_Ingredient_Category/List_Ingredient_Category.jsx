@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Main_Layout, TableComponent, callApi } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredientCategories } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
+import { deleteIngredientsCategoryData, getIngredientCategories } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
 
 const Content = () => {
   const [ingredientsCategoryData, setIngredientsCategoryData] = useState([]);
@@ -69,7 +69,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Ingredient Category"
           isLoading={isLoading}
-
+DeleteRedux={deleteIngredientsCategoryData}
         />
       </div>
     </>

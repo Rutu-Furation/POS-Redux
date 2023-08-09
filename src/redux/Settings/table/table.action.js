@@ -6,8 +6,12 @@ import {
   ADD_TABLE_LOADING,
   ADD_TABLE_ERROR,
   ADD_TABLE_SUCCESS,
+  DELETE_TABLE_LOADING,
+  DELETE_TABLE_SUCCESS,
+  DELETE_TABLE_ERROR,
 } from "./table.actionType";
 import { toast } from "react-toastify";
+import { tableEndpoints } from "../../../api/api_endpoints/settingsEndpoints";
 
 const baseURL = "https://famous-bear-kimono.cyclic.app";
 
@@ -38,3 +42,17 @@ export const addnewTable = (objdata) => async (dispatch) => {
   }
 };
 
+export const deleteTableData = (id) => async (dispatch) => {
+  dispatch({ type: DELETE_TABLE_LOADING });
+  try {
+    let res = await axios.delete(baseURL + tableEndpoints.deleteTable(id));
+    console.log("res", res);
+    if (res) {
+      dispatch({ type: DELETE_TABLE_SUCCESS, payload: res.data });
+      toast.success("Table Deleted successfully");
+    }
+  } catch (error) {
+    dispatch({ type: DELETE_TABLE_ERROR, payload: error.message });
+    toast.error("Failed to Deleted Table");
+  }
+};
