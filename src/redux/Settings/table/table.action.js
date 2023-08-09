@@ -8,13 +8,13 @@ import {
   ADD_TABLE_SUCCESS,
 } from "./table.actionType";
 import { toast } from "react-toastify";
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import { baseURL } from "../../../api/apiConfig";
+import { tableEndpoints } from "../../../api/api_endpoints/settingsEndpoints";
 
 export const getTableList = () => async (dispatch) => {
   dispatch({ type: GET_TABLE_LOADING });
   try {
-    let res = await axios.get(`${baseURL}/setting/table/list`);
+    let res = await axios.get(baseURL+tableEndpoints.getAllTables);
     console.log("res", res);
     if (res) {
       dispatch({ type: GET_TABLE_SUCCESS, payload: res.data });
@@ -27,7 +27,7 @@ export const getTableList = () => async (dispatch) => {
 export const addnewTable = (objdata) => async (dispatch) => {
   dispatch({ type: ADD_TABLE_LOADING });
   try {
-    let res = await axios.post(`${baseURL}/setting/table/new`, objdata);
+    let res = await axios.post(baseURL+tableEndpoints.addTable, objdata);
     if (res) {
       dispatch({ type: ADD_TABLE_SUCCESS, payload: res.data });
       toast.success("Table added successfully");

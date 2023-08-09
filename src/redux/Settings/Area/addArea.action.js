@@ -15,13 +15,12 @@ import {
 } from "./addArea.actionType";
 import axios from "axios";
 import { areaEndpoints } from "../../../api/api_endpoints/settingsEndpoints";
-
-const baseURL = "https://famous-bear-kimono.cyclic.app";
+import { baseURL } from "../../../api/apiConfig";
 
 export const getAreaData = () => async (dispatch) => {
   dispatch({ type: GET_AREA_LOADING });
   try {
-    let res = await axios.get(`${baseURL}/setting/area/list`);
+    let res = await axios.get(baseURL+areaEndpoints.getAllAreas);
     console.log("res", res);
     if (res) {
       dispatch({ type: GET_AREA_SUCCESS, payload: res.data });
@@ -36,7 +35,7 @@ export const addAreaData = (newData) => async (dispatch) => {
   try {
     console.log("newData", newData);
 
-    let res = await axios.post(`${baseURL}/setting/area/new`, newData);
+    let res = await axios.post(baseURL+areaEndpoints.addArea, newData);
 
     if (res) {
       dispatch({ type: ADD_AREA_SUCCESS, payload: res.data });
@@ -70,7 +69,7 @@ export const updateAreaData =
     dispatch({ type: UPDATE_AREA_LOADING });
     try {
       let res = await axios.update(
-        `${baseURL}/setting/area/delete/${id}`,
+        baseURL + areaEndpoints.updateArea(id),
         newobjData
       );
       console.log("res", res);
