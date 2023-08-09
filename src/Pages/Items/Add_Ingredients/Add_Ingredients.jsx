@@ -14,12 +14,21 @@ import { addIngredient_schema } from "../../../validations/itemsValidations.js";
 import { useDispatch, useSelector } from "react-redux";
 import { addnewIngredient } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 import playSoundEffect from "../../../utils/SoundEffect.js";
+import { getIngredientCategories } from "../../../redux/Items/IngredientsCategory/IngredientsCategory.action.js";
+import { getIngredientUnits } from "../../../redux/Items/IngredientsUnit/IngredientsUnit.action.js";
 
 const Content = () => {
+
+  const {IngredientCategoryData} = useSelector((state) => state.Ingredientcategory)
+  const {IngredientUnitsData} = useSelector((state) => state.IngredientsUnit)
+
+  console.log(IngredientUnitsData)
+
   const { units, fetchUnits } = useContext(FoodContext);
 
   // STATE FOR INGREDIENT CATEGORIES
   const [ingredientCategories, setIngredientCategories] = useState([]);
+  const [ingredientUnits, setIngredientUnits] = useState([])
 
   //States of inputs and select components
   const [inputValues, setInputValues] = useState("");
@@ -39,31 +48,35 @@ const Content = () => {
     }));
   };
 
+
   useEffect(() => {
-    // fetchUnits();
+    dispatch(getIngredientCategories())
+    dispatch(getIngredientUnits())
+  },[])
 
-    const fetchCategories = async () => {
-      const res = await callApi("GET", "/setting/ingredientCategory/list");
-      console.log(res);
-      const formatted = res.ingredientCategory.map((item) => ({
-        value: item._id,
-        label: item.ingredientCategory_name,
+  useEffect(() => {
+    if(IngredientCategoryData?.ingredientCategory){
+      const formatted = IngredientCategoryData?.ingredientCategory.map((item) => ({
+        value: item?._id,
+        label: item?.ingredientCategory_name,
       }));
-
       setIngredientCategories(formatted);
-    };
+      console.log(ingredientCategories)
+    }
+  }, [IngredientCategoryData]);
 
-    fetchCategories();
+  useEffect(() => {
+    if(IngredientUnitsData?.ingredientUnit){
+    const formattedUnits = IngredientUnitsData?.ingredientUnit.map((item) => ({
+      value: item?._id,
+      label: item?.ingredientUnit_name,
+    }));
+    setIngredientUnits(formattedUnits)
+    console.log(ingredientUnits)
+  }
+  },[IngredientUnitsData])
 
-    fetchUnits();
-  }, [loading]);
-
-  const formattedUnits = units?.ingredientUnit?.map((item) => ({
-    value: item._id,
-    label: item.ingredientUnit_name,
-  }));
-  // console.log(units);
-
+  
   //final ingredient object
   const newIngredient = {
     ...inputValues,
@@ -130,7 +143,7 @@ const Content = () => {
       labelText: "Purchase Unit",
       required: true,
       tooltip: true,
-      options: formattedUnits,
+      options: ingredientUnits,
       onChange: (value) => handleSelectChange(value, "PurchaseUnit"),
       inputType: "select",
       name: "PurchaseUnit",
@@ -140,7 +153,7 @@ const Content = () => {
       labelFor: "ingredientConsumptionUnit",
       labelText: "Consumption Unit",
       required: true,
-      options: formattedUnits,
+      options: ingredientUnits,
       onChange: (value) => handleSelectChange(value, "ConsumptionUnit"),
       tooltip: true,
       inputType: "select",

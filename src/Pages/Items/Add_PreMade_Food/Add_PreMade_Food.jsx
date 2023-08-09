@@ -10,6 +10,7 @@ import {
   toast,
 } from "../../../components/index.js";
 import { FoodContext } from "../../../context/FoodContext.jsx";
+import { useSelector } from "react-redux";
 
 const Content = () => {
 
