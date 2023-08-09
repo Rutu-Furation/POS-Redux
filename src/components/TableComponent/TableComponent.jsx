@@ -34,7 +34,8 @@ const TableComponent = ({
   deleteRoute,
   categories,
   pagename,
-  isLoading
+  isLoading,
+  DeleteRedux,
 }) => {
   // const [isLoading, setIsLoading] = useState(false);
   const [tableHeaders, setTableHeaders] = useState([]);
@@ -88,17 +89,13 @@ const TableComponent = ({
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage
   );
-
+  const dispatch = useDispatch();
   const handleDelete = async (dataId) => {
-    try {
-      let res = await callApi("DELETE", `${deleteRoute}/${dataId}`);
-      toast.success("Item deleted successfully");
-      playSoundEffect();
-      const updatedData = initialData.filter((item) => item.id !== dataId);
-      setInitialData(updatedData);
-    } catch (error) {
-      toast.error("Failed to delete item:", error);
-    }
+    dispatch(DeleteRedux(dataId));
+
+    playSoundEffect();
+    const updatedData = initialData.filter((item) => item.id !== dataId);
+    setInitialData(updatedData);
   };
 
   const playSoundEffect = () => {

@@ -14,6 +14,7 @@ import {
   UPDATE_AREA_ERROR,
 } from "./addArea.actionType";
 import axios from "axios";
+import { areaEndpoints } from "../../../api/api_endpoints/settingsEndpoints";
 
 const baseURL = "https://famous-bear-kimono.cyclic.app";
 
@@ -51,15 +52,15 @@ export const addAreaData = (newData) => async (dispatch) => {
 export const deleteAreaData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_AREA_LOADING });
   try {
-    let res = await axios.delete(`${baseURL}/setting/area/delete/${id}`);
+    let res = await axios.delete(baseURL + areaEndpoints.deleteArea(id));
     console.log("res", res);
     if (res.data) {
       dispatch({ type: DELETE_AREA_SUCCESS, payload: res.data });
-      toast.success("Area/Floor added successfully");
+      toast.success("Area/Floor Deleted successfully");
     }
   } catch (error) {
     dispatch({ type: DELETE_AREA_ERROR, payload: error.message });
-    toast.error("Failed to add Area/Floor");
+    toast.error("Failed to Deleted Area/Floor");
   }
 };
 
