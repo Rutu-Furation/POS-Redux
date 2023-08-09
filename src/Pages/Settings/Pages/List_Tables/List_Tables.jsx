@@ -22,9 +22,7 @@ const Content = () => {
   );
   console.log("TableListData", TableListData);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getTableList());
-  }, []);
+
   const handleSearch = (e) => {
     setSearchText(e.target.value);
     setCurrentPage(1);
@@ -45,23 +43,22 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const updatedData = TableListData.tables.map((item) => ({
-          "Area/Floor": item?.area_id?.area_name || "area name",
-          "Table Name": item.name || "table name",
-          "Seat Capacity": item.sit_capacity || 0,
-          Description: item.description || "description",
-          Outlet: item.outlet_name || "Outlet",
-          id: item._id || "",
-        }));
-        setTable(updatedData);
-      } catch (error) {
-        console.error("Error fetching ingredients:", error);
-      }
-    };
-    fetchData();
+    dispatch(getTableList());
   }, []);
+
+  useEffect(() => {
+    if (TableListData.tables) {
+      const updatedData = TableListData.tables.map((item) => ({
+        "Area/Floor": item?.area_id?.area_name || "area name",
+        "Table Name": item.name || "table name",
+        "Seat Capacity": item.sit_capacity || 0,
+        Description: item.description || "description",
+        Outlet: item.outlet_name || "Outlet",
+        id: item._id || "",
+      }));
+      setTable(updatedData);
+    }
+  }, [TableListData]);
 
   return (
     <>
@@ -82,6 +79,7 @@ const Content = () => {
           endPage={3}
           pageNumbers={[1, 2, 3]}
           pagename="Tables"
+          isLoading={isLoading}
         />
       </div>
     </>

@@ -16,13 +16,10 @@ const List_Area_Floor = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const { isloading, isError, AreaData } = useSelector((state) => state.Area);
+  const { isLoading, isError, AreaData } = useSelector((state) => state.Area);
 
   console.log("AreaData", AreaData.areas);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAreaData());
-  }, []);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -44,21 +41,20 @@ const List_Area_Floor = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const updatedData = AreaData.areas.map((item) => ({
-          Outlet: item.outlet_id.outlet_name || "outlet",
-          Name: item.area_name || "area name",
-          description: item.description || "description",
-          id: item._id || "",
-        }));
-        setAreadata(updatedData);
-      } catch (error) {
-        console.error("Error fetching ingredients:", error);
-      }
-    };
-    fetchData();
+    dispatch(getAreaData());
   }, []);
+
+  useEffect(() => {
+    if (AreaData.areas) {
+      const updatedData = AreaData.areas.map((item) => ({
+        Outlet: item.outlet_id.outlet_name || "outlet",
+        Name: item.area_name || "area name",
+        description: item.description || "description",
+        id: item._id || "",
+      }));
+      setAreadata(updatedData);
+    }
+  }, [AreaData]);
 
   return (
     <>
@@ -92,6 +88,7 @@ const List_Area_Floor = () => {
                   endPage={3}
                   pageNumbers={[1, 2, 3]}
                   pagename="Area"
+                  isLoading={isLoading}
                 />
               </div>
             </div>
