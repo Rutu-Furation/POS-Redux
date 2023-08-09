@@ -54,11 +54,11 @@ export const addFoodMenuCategory = (newData) => async (dispatch) => {
   }
 };
 
-export const deleteAreaData = (id) => async (dispatch) => {
+export const deleteFoodMenuCategoryData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_FOODMENUCATEGORY_LOADING });
   try {
     let res = await axios.delete(
-      baseURL + regularFoodMenuEndpoints.deleteRegularFoodMeny(id)
+      baseURL + FoodMenuCategoryEndpoints.deleteFoodMenuCategory(id)
     );
     console.log("res", res);
     if (res.data) {

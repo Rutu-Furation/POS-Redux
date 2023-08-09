@@ -6,7 +6,7 @@ import {
   TableComponent,
 } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getPreMadeFood } from "../../../redux/Items/PreMadeFood/PreMadeFood.actions.js";
+import { deletepremadefood, getPreMadeFood } from "../../../redux/Items/PreMadeFood/PreMadeFood.actions.js";
 
 const Content = () => {
   const [preMadeFood, setPreMadeFood] = useState([]);
@@ -41,26 +41,25 @@ const Content = () => {
 
   // Fetching data using redux dispatch
   useEffect(() => {
-      dispatch(getPreMadeFood())
-    }, []);
+    dispatch(getPreMadeFood());
+  }, []);
 
-    // Process the data once it's available
-    useEffect(() => {
-      if (PreMadeFoodData?.preFoodMade) {
-        const updatedData = PreMadeFoodData.preFoodMade.map((item) => ({
-          Code: item.code || "Nan",
-          Name: item.nameFood || "Nan",
-          "Purchase Price": item.purchasePrice || "Nan",
-          "Low Quantity/Amount": item.lowQAmt || "Nan",
-          Unit: item.unit || "Nan",
-          "Added By": "Admin User",
-          id: item._id || "",
-        }));
-        setPreMadeFood(updatedData);
-        console.log(updatedData);
-      }
-    }, [PreMadeFoodData]);
-
+  // Process the data once it's available
+  useEffect(() => {
+    if (PreMadeFoodData?.preFoodMade) {
+      const updatedData = PreMadeFoodData.preFoodMade.map((item) => ({
+        Code: item.code || "Nan",
+        Name: item.nameFood || "Nan",
+        "Purchase Price": item.purchasePrice || "Nan",
+        "Low Quantity/Amount": item.lowQAmt || "Nan",
+        Unit: item.unit || "Nan",
+        "Added By": "Admin User",
+        id: item._id || "",
+      }));
+      setPreMadeFood(updatedData);
+      console.log(updatedData);
+    }
+  }, [PreMadeFoodData]);
 
   return (
     <>
@@ -76,14 +75,13 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-
           totalPages={Math.ceil(preMadeFood?.length / rowsPerPage)}
-
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
           pagename="Pre Made Food"
           isLoading={isLoading}
+          DeleteRedux={deletepremadefood}
         />
       </div>
       {/* </div>

@@ -21,7 +21,9 @@ import { ingredientCategoryEndpoints } from "../../../api/api_endpoints/itemsEnd
 export const getIngredientCategories = () => async (dispatch) => {
   dispatch({ type: GET_INGREDIENTCATEGORY_LOADING });
   try {
-    let res = await axios.get(baseURL+ingredientCategoryEndpoints.getAllIngredientCategories);
+    let res = await axios.get(
+      baseURL + ingredientCategoryEndpoints.getAllIngredientCategories
+    );
     console.log("res", res);
     if (res.data) {
       dispatch({ type: GET_INGREDIENTCATEGORY_SUCCESS, payload: res.data });
@@ -30,7 +32,6 @@ export const getIngredientCategories = () => async (dispatch) => {
     dispatch({ type: GET_INGREDIENTCATEGORY_ERROR, payload: error.message });
   }
 };
-
 
 export const addIngredientcategory = (newData) => async (dispatch) => {
   dispatch({ type: ADD_INGREDIENTCATEGORY_LOADING });
@@ -53,7 +54,7 @@ export const addIngredientcategory = (newData) => async (dispatch) => {
   }
 };
 
-export const deleteAreaData = (id) => async (dispatch) => {
+export const deleteIngredientsCategoryData = (id) => async (dispatch) => {
   dispatch({ type: DELETE_INGREDIENTCATEGORY_LOADING });
   try {
     let res = await axios.delete(

@@ -7,7 +7,10 @@ import {
   SideBar,
   SideBar_Links,
 } from "../../../../components/index";
-import { deleteAreaData, getAreaData } from "../../../../redux/Settings/Area/addArea.action";
+import {
+  deleteAreaData,
+  getAreaData,
+} from "../../../../redux/Settings/Area/addArea.action";
 import { useDispatch, useSelector } from "react-redux";
 
 const List_Area_Floor = () => {
@@ -42,7 +45,6 @@ const List_Area_Floor = () => {
 
   useEffect(() => {
     dispatch(getAreaData());
-    
   }, []);
 
   useEffect(() => {

@@ -9,7 +9,10 @@ import {
   callApi,
 } from "../../../../components/index";
 import { useDispatch, useSelector } from "react-redux";
-import { getTableList } from "../../../../redux/Settings/table/table.action";
+import {
+  deleteTableData,
+  getTableList,
+} from "../../../../redux/Settings/table/table.action";
 
 const Content = () => {
   const [Table, setTable] = useState([]);
@@ -80,6 +83,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Tables"
           isLoading={isLoading}
+          DeleteRedux={deleteTableData}
         />
       </div>
     </>

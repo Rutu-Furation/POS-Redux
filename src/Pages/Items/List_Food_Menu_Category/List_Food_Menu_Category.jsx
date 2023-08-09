@@ -5,7 +5,7 @@ import {
   Main_Layout,
 } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
+import { deleteFoodMenuCategoryData, getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
 
 const Content = () => {
   const [FoodMenuCategory, setFoodMenuCategory] = useState([]);
@@ -71,6 +71,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Food Menu Category"
           isLoading={isLoading}
+          DeleteRedux={deleteFoodMenuCategoryData}
         />
       </div>
     </>
