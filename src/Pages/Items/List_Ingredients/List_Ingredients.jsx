@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 
-import { Main_Layout, callApi, TableComponent } from "../../../components/index.js";
+import { Main_Layout, TableComponent } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteIngredientsData, getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
+import {
+  deleteIngredientsData,
+  getIngredients,
+} from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
 const Content = () => {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -10,10 +13,11 @@ const Content = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { isLoading, isError, IngredientsData} = useSelector((state) => state.Ingredient)
-  // console.log(IngredientData)
+  const { isLoading, isError, IngredientsData } = useSelector(
+    (state) => state.Ingredient
+  );
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -31,15 +35,14 @@ const Content = () => {
 
   const exportToCsv = () => {
     // Implement the exportToCsv functionality here
-    console.log("Exporting CSV...");
   };
 
   useEffect(() => {
-    dispatch(getIngredients())
-  },[])
+    dispatch(getIngredients());
+  }, []);
 
   useEffect(() => {
-    if(IngredientsData?.ingredient){
+    if (IngredientsData?.ingredient) {
       try {
         const updatedData = IngredientsData?.ingredient.map((item) => ({
           Code: item.code,
@@ -81,8 +84,7 @@ const Content = () => {
           pageNumbers={[1, 2, 3]}
           pagename="Ingredients"
           isLoading={isLoading}
-           DeleteRedux={deleteIngredientsData}
-
+          DeleteRedux={deleteIngredientsData}
         />
       </div>
     </>

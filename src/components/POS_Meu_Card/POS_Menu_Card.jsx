@@ -2,7 +2,6 @@ import React from "react";
 import "./POS_Menu_Card.css";
 
 const POS_Menu_Card = ({ name, price, onClick, veg }) => {
- 
   return (
     <>
       <div
@@ -15,7 +14,6 @@ const POS_Menu_Card = ({ name, price, onClick, veg }) => {
       >
         <div className="card-body MenuCardBody">
           <div className="d-flex " style={{ height: "auto" }}>
-            {/* <div className="veg"></div> */}
             <div
               style={{ width: "3px" }}
               className={veg ? "bg-success" : "bg-danger"}

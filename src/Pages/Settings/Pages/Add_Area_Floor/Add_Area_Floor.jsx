@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+ 
 
 import {
   SettingsInput,
   Settings_Button,
   SettingsSelect,
   callApi,
-  HeadNav,
-  SideBar,
-  SideBar_Links,
+ 
   Toaster,
   Main_Layout,
 } from "../../../../components/index";
@@ -25,8 +23,7 @@ const Content = () => {
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
   const [allOutlets, setAllOutlets] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const id = "64ababaac632b42ec95f6297";
+   const id = "64ababaac632b42ec95f6297";
 
   useEffect(() => {
     const getOutlets = async () => {
