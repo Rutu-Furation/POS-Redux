@@ -35,13 +35,12 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    dispatch(getIngredients())
+  },[])
+
+  useEffect(() => {
+    if(IngredientsData?.ingredient){
       try {
-        // const res = await callApi("GET", "/setting/ingredient/list");
-
-        dispatch(getIngredients())
-
-        // console.log("ingredientsall", res.ingredient);
         const updatedData = IngredientsData?.ingredient.map((item) => ({
           Code: item.code,
           Name: item.name,
@@ -59,9 +58,8 @@ const Content = () => {
       } catch (error) {
         console.error("Error fetching ingredients:", error);
       }
-    };
-    fetchData();
-  }, []);
+    }
+  }, [IngredientsData]);
 
   return (
     <>

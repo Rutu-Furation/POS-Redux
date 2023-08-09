@@ -34,12 +34,11 @@ const Content = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await callApi("GET", "/setting/ingredientCategory/list");
+    dispatch(getIngredientCategories())
+  },[])
 
-      dispatch(getIngredientCategories())
-
-      console.log("ingredientCategory", res.ingredientCategory);
+  useEffect(() => {
+    if(IngredientCategoryData?.ingredientCategory){
       const updatedData = IngredientCategoryData.ingredientCategory.map((item) => ({
         Category: item.ingredientCategory_name,
         Description: item.description,
@@ -47,9 +46,8 @@ const Content = () => {
         id: item._id || "",
       }));
       setIngredientsCategoryData(updatedData);
-    };
-    fetchData();
-  }, []);
+    }
+  }, [IngredientCategoryData]);
 
   return (
     <>

@@ -38,21 +38,29 @@ const Content = () => {
     // Implement the exportToCsv functionality here
     console.log("Exporting CSV...");
   };
+
+  // Fetching data using redux dispatch
   useEffect(() => {
-    dispatch(getPreMadeFood());
-  }, []);
-  useEffect(() => {
-    const updatedData = PreMadeFoodData?.preFoodMade.map((item) => ({
-      Code: item.code || "Nan",
-      Name: item.nameFood || "Nan",
-      "Purchase Price": item.purchasePrice || "Nan",
-      "Low Quantity/Amount": item.lowQAmt || "Nan",
-      Unit: item.unit || "Nan",
-      "Added By": "Admin User",
-      id: item._id || "", // Fix the bitwise OR (|) to logical OR (||)
-    }));
-    setPreMadeFood(updatedData);
-  }, []);
+      dispatch(getPreMadeFood())
+    }, []);
+
+    // Process the data once it's available
+    useEffect(() => {
+      if (PreMadeFoodData?.preFoodMade) {
+        const updatedData = PreMadeFoodData.preFoodMade.map((item) => ({
+          Code: item.code || "Nan",
+          Name: item.nameFood || "Nan",
+          "Purchase Price": item.purchasePrice || "Nan",
+          "Low Quantity/Amount": item.lowQAmt || "Nan",
+          Unit: item.unit || "Nan",
+          "Added By": "Admin User",
+          id: item._id || "",
+        }));
+        setPreMadeFood(updatedData);
+        console.log(updatedData);
+      }
+    }, [PreMadeFoodData]);
+
 
   return (
     <>
@@ -68,9 +76,9 @@ const Content = () => {
           handlePageChange={handlePageChange}
           handleRowsPerPageChange={handleRowsPerPageChange}
           exportToCsv={exportToCsv}
-          totalPages={Math.ceil(
-            PreMadeFoodData?.preFoodMade?.length / rowsPerPage
-          )}
+
+          totalPages={Math.ceil(preMadeFood?.length / rowsPerPage)}
+
           startPage={1}
           endPage={3}
           pageNumbers={[1, 2, 3]}
