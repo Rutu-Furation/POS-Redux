@@ -1,23 +1,22 @@
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  TableComponent,
-  Main_Layout,
-  callApi,
-  toast,
-  Toaster,
-} from "../../../components/index.js";
+import { TableComponent, Main_Layout } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
-import { GetFoodMenu, deleteFoodMenuData } from "../../../redux/Items/FoodMenu/FoodMenu.actions.js";
+import {
+  GetFoodMenu,
+  deleteFoodMenuData,
+} from "../../../redux/Items/FoodMenu/FoodMenu.actions.js";
 const Content = () => {
   const [foodMenu, setFoodMenu] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const {isLoading, isError, FoodMenuData} = useSelector((state) => state.foodMenu)
-  console.log(FoodMenuData)
+  const { isLoading, isError, FoodMenuData } = useSelector(
+    (state) => state.foodMenu
+  );
+  console.log(FoodMenuData);
 
   const handleSearch = (e) => {
     setSearchText(e.target.value);
@@ -35,18 +34,14 @@ const Content = () => {
 
   const exportToCsv = () => {
     // Implement the exportToCsv functionality here
-    console.log("Exporting CSV...");
   };
 
   useEffect(() => {
-
-    dispatch(GetFoodMenu())
-  },[])
+    dispatch(GetFoodMenu());
+  }, []);
 
   useEffect(() => {
-   
-     if(FoodMenuData?.data?.foodMenu){
-
+    if (FoodMenuData?.data?.foodMenu) {
       const updatedData = FoodMenuData?.data?.foodMenu?.map((item) => ({
         "Food Menu Type": item.food_category?.name || "Nan",
         Code: item.code || "Code",
@@ -59,10 +54,8 @@ const Content = () => {
         id: item._id || "",
       }));
       setFoodMenu(updatedData);
-
     }
   }, [FoodMenuData]);
-  
 
   const categories = useMemo(() => {
     const uniqueCategories = [

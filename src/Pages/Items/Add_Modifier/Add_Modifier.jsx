@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import playSoundEffect from "../../../utils/SoundEffect.js";
 import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
 
-
 const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,6 +26,7 @@ const Content = () => {
 
   const {isLoading} = useSelector((state) => state.modifier)
   const {IngredientsData} = useSelector((state) => state.Ingredient)
+
 
   // const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);

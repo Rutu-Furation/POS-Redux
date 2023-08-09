@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Main_Layout,
-  callApi,
-  TableComponent,
-} from "../../../components/index.js";
+import { Main_Layout, TableComponent } from "../../../components/index.js";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteIngredientsUnitData,
@@ -38,16 +34,13 @@ const Content = () => {
 
   const exportToCsv = () => {
     // Implement the exportToCsv functionality here
-    console.log("Exporting CSV...");
   };
 
-  // Fetching data from redux
   useEffect(() => {
     dispatch(getIngredientUnits());
   }, []);
 
   useEffect(() => {
-    // Processing the data
     if (IngredientUnitsData?.ingredientUnit) {
       const updatedData = IngredientUnitsData.ingredientUnit.map((item) => ({
         "Unit Name": item.ingredientUnit_name,

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Outlets from "../Outlets";
-import { useLocation } from "react-router-dom";
 
 import { callApi, Main_Layout } from "../../../components/index";
 

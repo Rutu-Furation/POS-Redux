@@ -35,7 +35,7 @@ const Content = () => {
   const [selectedValues, setSelectedValues] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const {isLoading} = useSelector((state) => state.Ingredient)
+  const { isLoading } = useSelector((state) => state.Ingredient);
 
   const handleInputChange = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
@@ -65,6 +65,7 @@ const Content = () => {
     }
   }, [IngredientCategoryData]);
 
+
   useEffect(() => {
     if(IngredientUnitsData?.ingredientUnit){
     const formattedUnits = IngredientUnitsData?.ingredientUnit.map((item) => ({
@@ -78,6 +79,7 @@ const Content = () => {
 
   
   //final ingredient object
+
   const newIngredient = {
     ...inputValues,
     ...selectedValues,
@@ -95,7 +97,6 @@ const Content = () => {
   const handleAddIngredient = async () => {
     const validationErrors = validateForm();
     if (!validationErrors) {
-       
       dispatch(addnewIngredient(newIngredient));
       playSoundEffect();
     }
@@ -238,7 +239,6 @@ const Content = () => {
                   required={fields.required}
                   errorMsg={errors[fields.name]}
                   tooltip={fields.tooltip}
-                  // pattern={fields.pattern}
                 />
               )}
 

@@ -29,7 +29,11 @@ const Outlets = () => {
       {/* <OutlesCard />
       <OutlesCard /> */}
       {outlets?.map((item, index) => (
-        <OutlesCard key={index} name={item.outlet_name} address={item.address} />
+        <OutlesCard
+          key={index}
+          name={item.outlet_name}
+          address={item.address}
+        />
       ))}
     </div>
   );

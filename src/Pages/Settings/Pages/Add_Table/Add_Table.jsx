@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../context/AuthContext";
 
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
@@ -21,13 +20,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addnewTable } from "../../../../redux/Settings/table/table.action";
 import playSoundEffect from "../../../../utils/SoundEffect";
 const Add_Table = () => {
-
-  const {isLoading} = useSelector((state) => state.table)
+  const { isLoading } = useSelector((state) => state.table);
 
   const [inputValues, setInputValues] = useState("");
   const [selectedValues, setSelectedValues] = useState("");
   const [areas, setAreas] = useState("");
-  const [loading, setLoading] = useState(false);
+
   const { user } = useContext(AuthContext);
 
   const newTable = {
@@ -48,14 +46,12 @@ const Add_Table = () => {
     getAreaDetails();
   }, []);
 
-  //getting input values
   const handleInputs = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
   };
 
   console.log(inputValues);
 
-  //getting select values
   const handleSelectChange = (value, key) => {
     setSelectedValues((prevState) => ({
       ...prevState,
@@ -195,101 +191,6 @@ const Add_Table = () => {
                       </div>
                     ))}
                   </div>
-                  {/* <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                    <label
-                      htmlFor="tableDesc"
-                      style={{ fontSize: "12px" }}
-                      className="form-label"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      name="description"
-                      style={{ height: "36px!important" }}
-                      id="tableDesc"
-                      className="form-control"
-                      cols="30"
-                      rows="1"
-                      onChange={handleInputs}
-                    ></textarea>
-                  </div> */}
-                  {/* <div className="row">
-                    <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                      <SettingsSelect
-                        labelFor="tableAreaFloor"
-                        required
-                        labelText="Area/Floor"
-                        selectId="tableAreaFloor"
-                        options={areas}
-                        onChange={(value) =>
-                          handleSelectChange(value, "area_id")
-                        }
-                        error={errors.area_id}
-                      />
-                    </div>
-
-                    <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                      <SettingsInput
-                        inputId="tableName"
-                        labelFor="tableName"
-                        labelText="Table Name"
-                        required
-                        placeholder="Table Name"
-                        type="text"
-                        name="name"
-                        onChange={handleInputs}
-                        errorMsg={errors.name}
-                      />
-                    </div>
-
-                    <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                      <SettingsInput
-                        inputId="seatCapacity"
-                        labelFor="seatCapacity"
-                        labelText="Seat Capacity"
-                        required
-                        placeholder="Seat Capacity"
-                        type="number"
-                        name="sit_capacity"
-                        onChange={handleInputs}
-                        errorMsg={errors.sit_capacity}
-                      />
-                    </div>
-                  </div> */}
-
-                  {/* <div className="row">
-                    <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                      <SettingsInput
-                        inputId="tablePosition"
-                        labelFor="tablePosition"
-                        labelText="Table Position"
-                        placeholder="Table Position"
-                        type="text"
-                        name="position"
-                        onChange={handleInputs}
-                        errorMsg={errors.position}
-                      />
-                    </div>
-
-                    <div className="mb-3 col-sm-12 col-md-4 col-lg-4">
-                      <label
-                        htmlFor="tableDesc"
-                        style={{ fontSize: "12px" }}
-                        className="form-label"
-                      >
-                        Description
-                      </label>
-                      <textarea
-                        name="description"
-                        style={{ height: "36px!important" }}
-                        id="tableDesc"
-                        className="form-control"
-                        cols="30"
-                        rows="1"
-                        onChange={handleInputs}
-                      ></textarea>
-                    </div>
-                  </div> */}
 
                   <div className="row">
                     <div className="mb-3 col-sm-12 col-md-4 col-lg-2">
