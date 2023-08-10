@@ -22,17 +22,16 @@ const Content = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [inputValues, setInputValues] = useState("");
-  const [ingredientOptions, setIngredientOptions] = useState([])
+  const [ingredientOptions, setIngredientOptions] = useState([]);
 
-  const {isLoading} = useSelector((state) => state.modifier)
-  const {IngredientsData} = useSelector((state) => state.Ingredient)
-
+  const { isLoading } = useSelector((state) => state.modifier);
+  const { IngredientsData } = useSelector((state) => state.Ingredient);
 
   // const { ingredients, fetchIngredients } = useContext(FoodContext);
   console.log("inputValues", inputValues);
   useEffect(() => {
     // fetchIngredients();
-    dispatch(getIngredients())
+    dispatch(getIngredients());
   }, []);
 
   const newModifier = {
@@ -45,14 +44,16 @@ const Content = () => {
   );
 
   useEffect(() => {
-    const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
-      value: item._id,
-      label: item.name,
-      costUnit: item.costUnit,
-      code: item.code,
-    }));
-    setIngredientOptions(ingredientOptions)
-  },[IngredientsData])
+    if (IngredientsData?.ingredient) {
+      const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
+        value: item._id,
+        label: item.name,
+        costUnit: item.costUnit,
+        code: item.code,
+      }));
+      setIngredientOptions(ingredientOptions);
+    }
+  }, [IngredientsData]);
 
   //FUNCTION FOR HANDLING INPUT DATA
   const handleInputData = (e) => {
@@ -185,6 +186,7 @@ const Content = () => {
               options={ingredientOptions}
               error={errors.ingredient}
               onChange={handleAddRow}
+              loading={isLoading}
             />
           </div>
 
