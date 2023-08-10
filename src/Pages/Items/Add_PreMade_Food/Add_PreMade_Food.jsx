@@ -1,52 +1,84 @@
 import React, { useContext, useEffect, useState } from "react";
- 
+
 import {
-   SettingsInput,
+  SettingsInput,
   Settings_Button,
   SettingsSelect,
   Main_Layout,
-  
 } from "../../../components/index.js";
 import { FoodContext } from "../../../context/FoodContext.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getIngredients } from "../../../redux/Items/Ingredients/Ingredients.action.js";
+import { getFoodMenuCategory } from "../../../redux/Items/FoodMenuCategory/FoodMenuCategory.actions.js";
+import { getIngredientUnits } from "../../../redux/Items/IngredientsUnit/IngredientsUnit.action.js";
 
 const Content = () => {
+  const dispatch = useDispatch();
 
-  const {isLoading} = useSelector((state) => state.premadefood)
+  const { isLoading } = useSelector((state) => state.premadefood);
+  const { FoodMenuCategoryData } = useSelector(
+    (state) => state.FoodMenuCategory
+  );
+  const { IngredientsData } = useSelector((state) => state.Ingredient);
+  const { IngredientUnitsData } = useSelector((state) => state.IngredientsUnit);
 
-  const {
-    foodCategories,
-    ingredients,
-    units,
-    fetchFoodCategories,
-    fetchIngredients,
-    fetchUnits,
-  } = useContext(FoodContext);
+  // const {
+  //   foodCategories,
+  //   ingredients,
+  //   units,
+  //   fetchFoodCategories,
+  //   fetchIngredients,
+  //   fetchUnits,
+  // } = useContext(FoodContext);
 
   // STATE FOR INPUT VALUES
   const [inputValues, setInputValues] = useState("");
 
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [ingredientOptions, setIngredientOptions] = useState([]);
+  const [unitOptions, setUnitOptions] = useState([]);
+
   useEffect(() => {
-    fetchFoodCategories();
-    fetchIngredients();
-    fetchUnits();
+    // fetchFoodCategories();
+    // fetchIngredients();
+    // fetchUnits();
+    dispatch(getFoodMenuCategory());
+    dispatch(getIngredients());
+    dispatch(getIngredientUnits());
+    // dispatch(GetFoodMenu())
   }, []);
 
-  const categoryOptions = foodCategories?.foodCategory?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  useEffect(() => {
+    if (FoodMenuCategoryData?.foodCategory) {
+      const categoryOptions = FoodMenuCategoryData?.foodCategory?.map(
+        (item) => ({
+          value: item._id,
+          label: item.name,
+        })
+      );
+      setCategoryOptions(categoryOptions);
+    }
+  }, [FoodMenuCategoryData]);
 
-  const ingredientOptions = ingredients?.ingredient?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
+  useEffect(() => {
+    if (IngredientsData?.ingredient) {
+      const ingredientOptions = IngredientsData?.ingredient?.map((item) => ({
+        value: item._id,
+        label: item.name,
+      }));
+      setIngredientOptions(ingredientOptions);
+    }
+  }, [IngredientsData]);
 
-  const unitOptions = units?.ingredientUnit?.map((item) => ({
-    value: item._id,
-    label: item.ingredientUnit_name,
-  }));
-  console.log(units);
+  useEffect(() => {
+    if (IngredientUnitsData) {
+      const unitOptions = IngredientUnitsData?.ingredientUnit?.map((item) => ({
+        value: item._id,
+        label: item.ingredientUnit_name,
+      }));
+      setUnitOptions(unitOptions);
+    }
+  }, [IngredientUnitsData]);
 
   const handleInputValues = (e) => {
     setInputValues({ ...inputValues, [e.target.name]: e.target.value });
